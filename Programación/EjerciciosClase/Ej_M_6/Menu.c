@@ -10,12 +10,12 @@ void es_vocal(char letra){
 
 	}
 }
-void calcular_area_figura(double radio, double area){
+void _calcular_area_figura(double radio, double area){
 	area = M_PI * pow(radio, 2);
 	printf("El area del circulo con radio %.2lf es: %.2lf\n", radio, area);
 }
 
-void calcular_area_figura_2(double lado, double area){
+void _calcular_area_figura_2(double lado, double area){
 	area = lado * lado;
 	printf("El area del cuadrado con lado %.2lf es; %.2lf\n", lado, area);
 }
@@ -34,7 +34,7 @@ void calcular_area(){
 		double radio;
 		scanf("%lf", &radio);
 		if (radio > 0){
-			calcular_area_figura(radio, area);
+			_calcular_area_figura(radio, area);
 		}else{
 			printf("El radio debe de ser un número positivo\n");
 
@@ -45,7 +45,7 @@ void calcular_area(){
 		double lado;
 		scanf("%lf", &lado);
 		if (lado > 0){
-			calcular_area_figura_2(lado, area);
+			_calcular_area_figura_2(lado, area);
 		}else{
 			printf("El valor del lado debe de ser un número positivo");
 		}
@@ -73,15 +73,26 @@ void calcular_promedio(int opcion, double num1, double num2, double num3, double
 }
 void convertir_hora_24_a_12(){
 	int Hora;
-	printf("Ingrese la hora en formato 24h para cambiarla a formato 12h: ");
-	scanf("%D", Hora);
-	if (Hora !> 13 && Hora !< 24){
-		printf("El valor introducido no es correcto.");
+	printf("Ingrese la hora en formato 24h para cambiarla a formato 12h: \n");
+	scanf("%d", &Hora);
+	if (Hora < 13 || Hora > 24){
+		printf("El valor introducido no es correcto.%d\n", Hora);
 	}else {
-		printf("La hora que has introducido es: %d");
+		printf("La hora que has introducido es: %d\n", Hora);
 	}
-	int HoraPm = hora - 12;
-	printf("La hora que has introducido transformada a formato 12H es: ", HoraPm);
+	int HoraPm = Hora - 12;
+	printf("La hora que has introducido transformada a formato 12H es: %d\n", HoraPm);
+
+}
+void es primo(){
+	int numP;
+	printf("Introduce el numero que quieras revisar\n");
+	scanf("%d", numP);
+	if (numP < 0 || numP > 10){
+		printf("No podemos comprobar ese número");
+	}else {
+		Printf("");
+	}
 
 }
 int main(){
@@ -92,6 +103,7 @@ int main(){
 	printf("1. Vocal\n");
 	printf("2. Calcular área\n");
 	printf("3. Calcular promedio\n");
+	printf("4. Cambio de Formato de Hora\n");
 	printf("Opción: ");
 	scanf("%d", &menu);
 	switch (menu){
@@ -142,7 +154,7 @@ int main(){
 			}break;
 		case 4:
 
-			convertir_hora_24_a_12(){
+			convertir_hora_24_a_12();
 				break; 
 
 				default:
