@@ -2,6 +2,6 @@
 #include<stdlib.h>
 
 int main(){
-	printf("Hola Git\n");
+	printf("Hola Jose Maria De Lucas Plata\n");
 
 }
