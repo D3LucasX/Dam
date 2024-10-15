@@ -87,7 +87,9 @@ void calcular_promedio(){
 
 	int opcion;
 	double num1, num2, num3, num4;
-	printf("¿De cuantos números quieres hacer el promedio?\n");
+	printf("¿De cuantos números quieres hacer el promedio?\n\
+			1. De tres números.\n\
+			2. De cuatro números\n");
 	scanf("%d", &opcion);
 	if (opcion != 1 && opcion != 2){
 		printf("La opcion no es válida");
