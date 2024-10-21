@@ -3,5 +3,6 @@
 
 int main(){
 	printf("Hola Jose Maria De Lucas Plata\n");
+	return 0;
 
 }
