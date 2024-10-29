@@ -1,0 +1,83 @@
+		COMANDOS DE GIT EN LOCAL
+
+Configuración de GiT:
+	git config --global user.name //Nombre de usuario.
+	git config --global user.email //Tu email.
+	git config --list # Verifica tu información
+
+2. Iniciar un repositorio:
+	git init. # inicializa un nuevo repositorio en el directorio local.
+	git clone # Clona un repositorio local
+
+3. Estados de repositorio:
+	git status # Muestra el estado de los cambios.
+	git diff # Muestra las diferencias de los archivos no agregados
+	git diff --staged # Muestra las diferencias de los archivos ya agregados.
+
+4 Añadir y confirmar cambios:
+	git add archivo		#Añade un archivo específico al area de staging.
+	git add .		#Añade todos los archivos modificados al area de staging.
+	git commit -m "El mensaje que le quieras dar"	# Crea un commit con el mensaje.
+	git commit 	# abre el editor para escribir un mensaje de commit.
+
+5. Gestionar ramas:
+	git branch	# Lista las ramas locales.
+	git branch nombre_de_la_rama	#Crea una nueva rama.
+	git checkout nombre_rama	#Cambia a la rama especificada.
+	git checkout -b nombre_rama	#Crea y te cambia a la nueva rama-
+	git branch -d nombre_rama	#Elimina una rama  local.
+	git merge nombre_rama		#Fusiona otra rama con la rama actual.
+
+6. Revisar historial de commits:
+	git log		#Muestra el historial de commits
+	git lod --oneline	#Muestra el historial de una sola linea por commit
+	git log --graph --oneline	#Muestra el historial en un formato graficosimplificado.
+
+7. Deshacer y revertir cambios
+	git restore archivo	# Deshace cambios del archivo especificado.
+	git restore --staged archivo	#Quita el archivo del area de staging
+	git reset -- soft HEAD~1	#Deshace el último commit manteniendo los cambios de staging
+	git reset --hard HEAD~1	# Deshace el último commit y tods los cambios.
+	git revert id_commit	#Revertir un commit específico manteniendo el historial
+			
+			
+				COMANDOS DE GIT EN REMOTO
+1 Agregar y gestionar remotos:
+	git remote add nombre_remoto url_remoto		#Agrega un nuevo remoto
+	git remote -v	#Agrega los remotos configurados
+	git remote remove nombre_remoto 	#Elimina un remoto
+	git rename nombre_antiguo nombre_nuevo	#Cambia el nombre de un remoto
+
+2. Clonar un repositorio:
+	git clone url_remoto	# Clona el repositorio en el directorio actual
+	git clone url_remoto nombre_directorio #Clona el repositorio de un directorio específico.
+3. Obtener cambios de repositorio remoto
+	git fetch nombre_remoto		#obtiene las actualizaciones del remoto sin fusionarlas.
+	git fetch --all		#obtiene las actualizaciones de todos los remotos.
+	git pull nombre_remoto nombre_rama	#obtiene y fusiona los cambios de la rama remota.
+	git pull	#Equivalente a 'git pull origin main' si estas en 'main'
+
+4. Enviar cambios al repositorio remoto:
+	git push nombre_remoto nombre_rama 	#Envia una rama loacal al remoto.
+	git push -u nombre_remoto nombre_rama 	#Envia la rama y la establece como upstream.
+	git push --all nombre_remoto	# Envia todas las ramas al remoto.
+	git push--tags nombre_remoto	#Envia todas las etiquetas (tags) al remoto
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
