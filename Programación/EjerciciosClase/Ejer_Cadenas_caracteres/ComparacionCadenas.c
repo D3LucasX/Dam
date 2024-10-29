@@ -2,7 +2,9 @@
 #include<stdlib.h>
 
 int main(){
-	char palabra[100];
+	char palabra[100];						//Nunca seran iguales por que las direcciones de memoria nunca van a ser las mismas
+									//entonces lo esperable es que siempre la segunda palabra sera mas mayor que la primera ya que 
+									//estara guardada en una posición mas avanzada de la memoria por lo tanto sera mayor.
 	char palabra2[100];
 	printf("Introduzca una palabra\n");
 	scanf("%s", palabra);
@@ -35,3 +37,9 @@ int main(){
 	return 0;	
 
 }
+// para la compàracion con los bucles:
+// 	for (int i = 0; i< 8; i++){
+// 		if (palabra[1] == palabra2 [1]){
+//
+// 		}
+// 	}

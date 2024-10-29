@@ -2,12 +2,13 @@
 #include<stdlib.h>
 
 int main(){
-	printf("Introduce un numero de dos cifras: ");
-	scanf("%d", &num);
+
 		int num;
+	printf("Introduce un número: \n");
+	scanf("%d", &num);
 		int resultado;
 		int divisor = 10;
-		int resto;
+		int resto = 0;
 
 	do {
 						// El resto de la primera vuelta lo guarda
@@ -19,6 +20,7 @@ int main(){
 	       	resto = num % divisor;	
 		num = num / divisor;
 		resultado = resultado + resto;
+		//En la ultima division, da 0 por que estamos operando con enteros, al no podernos dar un 0, algo, nos pone el 0.
 		
 		printf("Dígito= %d\n", resto);
 	}while(num != 0);	
