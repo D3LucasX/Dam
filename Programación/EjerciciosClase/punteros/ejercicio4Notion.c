@@ -12,16 +12,17 @@
 		int cambio = 0;
 	      	cambio = *n;
 		*n = *f;
-		*n = cambio;	// Incremento el contenido de n
+		*f = cambio;	// Incremento el contenido de n
 		//(*n)++; Asi tambien se podria hacer.
 	}
 int main(){
 	int n = 10, f = 20;
+	printf("Las variables al inicio contienen: n = %d, f = %d\n", n, f);
 	intercambiar(&n, &f); // La funcion modifica el contenido de la direccion de memoria
-			     // Como la funcion esta pasando una direccion de memoria, recibiremos
-			     // una direccion de memoria en la llamada de la función, por
-			     // eso ponemos el &Valor.
-	printf("ahora quedaria: n = %d, f = %d", n, f); 
+			     // Como la funcion esta pasando dos direccion de memoria, recibiremos
+			     // dos direccion de memoria en la llamada de la función, por
+			     // eso ponemos el &n y &f..
+	printf("ahora quedaria: n = %d, f = %d\n", n, f); //No hace falta poner el & ya que la funcion ha cambiado el valor de las variables. 
 
 	return 0;
 }
