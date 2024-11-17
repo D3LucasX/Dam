@@ -23,15 +23,14 @@ void IngresoDatos(Temperatura *semana){
 }
 
 
-void CalcularPromedio(Temperatura *semana){
+float CalcularPromedio(Temperatura *semana){
 	int i;
 	float promedio = 0;
 	for(i = 0; i < 7; i++){
 	promedio += semana->tempe[i];
 	}
 	promedio /= i;
-
-	printf("El promedio de temperatura de los dias que registraste es de: %.2f\n", promedio);
+	return promedio;
 }
 
 
@@ -63,8 +62,22 @@ void Menor(Temperatura *semana){
 
 		printf("La temperatura mínima sera el dia %s con %.2fºC\n", semana->nombre[diaMinima], minima);
 }
+void MayorPromedio(Temperatura *semana){
+	int i;
+	float promedio;
+	int diaMayorPromedio;
+	for(i = 0; i < 7; i++){
+	if(semana->tempe[i] > promedio){
+		printf("El dia %s, esta por encima del promedio de %.2f con %.2f.\n", semana->nombre[i], promedio, semana->tempe[i]);
+}else{
+	printf("El dia %s, esta por debajo del promedio de %.2f con %.2f.\n", semana->nombre[i], promedio, semana->tempe[i]);
+}
+}
+}
+
 int main (){
 	int i = 0;
+	float promedio;
 	Temperatura semana;
 
 	IngresoDatos(&semana);
@@ -73,11 +86,13 @@ int main (){
 		printf("Dia %d: %s - %.2fºC\n", i + 1, semana.nombre[i], semana.tempe[i]);
 	}
 
-	CalcularPromedio(&semana);
+	CalcularPromedio(&semana);	
+	printf("El promedio de temperatura de los dias que registraste es de: %.2f\n", promedio);
 	
 	Mayor(&semana);
 	
 	Menor(&semana);
+	MayorPromedio(&semana);
 
 
 
