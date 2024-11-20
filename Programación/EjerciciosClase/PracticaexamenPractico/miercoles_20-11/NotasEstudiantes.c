@@ -12,7 +12,7 @@ typedef struct{
 }Notas;
 Notas IngresoDeDatos(Notas alumnos, int NumeroAlumnos){
 	for(int i = 0; i < NumeroAlumnos; i++){
-	printf("Ingrese los datos del alumno número %d\n", i + 1);
+	printf("Ingrese el nombre del alumno nº %d\n", i + 1);
 	scanf(" %[^\n]", alumnos.nombres[i]);
 	printf("Ingresa la nota media del alumno %d\n", i + 1);
 	scanf("%lf", &alumnos.notas[i]);
