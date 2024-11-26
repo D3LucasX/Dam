@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 /*
  *
@@ -27,7 +28,7 @@ typedef struct{
 	
 	//Estudiante * estudiante_nuevo;			//No me vale por que no tiene un amemoria reservada para rellenar los datos de ese estudiante nuevo
 	Estudiante * estudiante_nuevo = malloc//memory allocation //memoria dinamica-> esto si valdria por que reservas memoria, pero aun no sabemos como se hace.*/
-void inicializar(Estudiante * estudiante_a_relenar, char * nombre, int edad, float nota){
+void inicializar(Estudiante * estudiante_a_rellenar, char * nombre, int edad, float nota){
 
 	//estudiante_a_rellenar.edad = edad No compila por que estudiante_a_rellenar es un puntrero, no un estudiante en si, por eso usamos la flecha ' -> '
 	estudainte_a_rellenar -> edad = edad;
@@ -35,6 +36,11 @@ void inicializar(Estudiante * estudiante_a_relenar, char * nombre, int edad, flo
 	//estudiante_a_rellenar.nombre= nombre; Esto no funciona por que con esto no pasa la cadena de caracteres si no que pasa el espacio de memoria.
 	strcpy(estudiante_a_rellenar -> nombre,nombre);
 
+}
+//Tiene que recibir un puntero a estudiante pr que va a modificar la edad del estudiante, si no hiciera falta no haria falta pasar el puntero.
+//Si no va  a devlover nada solo sera void
+void cumpleanios(Estudiante * cumpleanero){
+	cumpleanero->edad ++;
 }
 
 int main (){
@@ -48,7 +54,6 @@ int main (){
 	printf("Size of listado %lu\n", sizeof(listado)); // 560 porque hay 28 bites por cada estudiante, que hay 20.
 	printf("Size of Estudiante %lu\n", sizeof(Estudiante)); // 28 porque hay 28 bites por estudiante
 	
-	
 	printf("Cuantos estudiantes desea inicializar?\n");
 	scanf("%d", num_estudiantes);
 	for(int i = 0; i < num_estudiantes; i++){
@@ -60,9 +65,13 @@ int main (){
 	printf("Introduce el nombre: \n");
 	scanf("%s", nombre);
 
-	inicializar(listado + i, nombre, edad, nota);
+	inicializar(listado + i, nombre, edad, nota); //Es listado solo por que te pide un puntero y listao ya es un puntero
 	/*inicializar(&listado[0], nombre, edad, nota);*/  //Esto tambien esta bien pero cuando tienes mucisimos datos te puedes liar.
 	}// Esto "rellena estudiantes", entre comillas
+	/*inicializar(listado, nombre, edad, nota);*/
+	printf("Edad antigua de %s; %d\n", listado[0].nombre, listado[0].edad);
+	cumpleanos (%listado[0]);
+	printf("Edad nueva : %d\n", listado[0].edad);
 	return EXIT_SUCCESS;
 
 }
