@@ -40,6 +40,14 @@ void MostrarLibros(const Libro * libro_a_imprimir){
 	}
 }
 
+void IdentificaLibro(const Libro * Identifica_libro, whatID){
+	printf("¿Que libro desea buscar?");
+	printf("\tIntroduzca el numero: \n");
+	scanf("\t%d",whatID );
+	if(whatID != ){
+
+	}
+}
 
 
 int main (){
