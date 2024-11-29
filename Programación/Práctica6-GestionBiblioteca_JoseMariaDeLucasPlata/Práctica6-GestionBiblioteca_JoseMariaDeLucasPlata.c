@@ -28,29 +28,50 @@ typedef struct{
 	int cantidad;
 }Libro;
 
+
+void MostrarLibro(const Libro * libro_a_imprimir){ //Pasamos por referencia para poder usarlo en otras funciones.
+		int i = 0;
+		printf("\tID: %d\n", libro_a_imprimir->id);
+		printf("\tTítulo: %s\n", libro_a_imprimir->titulo);
+		printf("\tAutor: %s\n", libro_a_imprimir->autor);
+		printf("\tPrecio: %.2f\n", libro_a_imprimir->precio);
+		printf("\tCategoria: %d\n", libro_a_imprimir->categoria);
+		printf("\tStock: %d\n\n", libro_a_imprimir->cantidad);
+		i++;
+	}
+
 void MostrarLibros(const Libro * libro_a_imprimir){
 	for(int i = 0; i < 40; i++){
 		printf("Libro numero %d.\n", i + 1);
-		printf("\tID: %d\n", libro_a_imprimir[i].id);
-		printf("\tTítulo: %s\n", libro_a_imprimir[i].titulo);
-		printf("\tAutor: %s\n", libro_a_imprimir[i].autor);
-		printf("\tPrecio: %.2f\n", libro_a_imprimir[i].precio);
-		printf("\tCategoria: %d\n", libro_a_imprimir[i].categoria);
-		printf("\tStock: %d\n\n", libro_a_imprimir[i].cantidad);
+		MostrarLibro(&libro_a_imprimir[i]);
 	}
 }
 
-void IdentificaLibro(const Libro * Identifica_libro, whatID){
-	printf("¿Que libro desea buscar?");
+void IdentificaLibro(const Libro * Catalogo) {
+	int buscar;
+	char SiNo = 'S';
+	do{
+	printf("¿Desea buscar un libro?");
+	scanf("%c", &SiNo);
+	
 	printf("\tIntroduzca el numero: \n");
-	scanf("\t%d",whatID );
-	if(whatID != ){
-
+	scanf("\t%d", &buscar);
+	for (int i = 0; i < 40; i++){
+		if(buscar == Catalogo[i].id){
+			MostrarLibro(&Catalogo[i]);
+			break;
+		
+		}
 	}
+
+}while (SiNo == 'S');
 }
+
+
 
 
 int main (){
+	int i = 0;
 
 	Libro libro[40] = {
 		{1, "To Kill a Mockingbird", "Harper Lee", 15.99, FICCIÓN, 10},
@@ -96,8 +117,11 @@ int main (){
 	} ;
 
 	MostrarLibros(libro);
+	MostrarLibro(&libro[i]);
+	IdentificaLibro(libro);
 
 
 	return EXIT_SUCCESS;
 
 }
+
