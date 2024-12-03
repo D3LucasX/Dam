@@ -76,7 +76,8 @@ void IncrementarStock(Libro * Libro_a_Incrementar){
 	scanf("\t%d", &incremento);
 	for (int i = 0; i < 40; i++){
 		if(Libro_a_Incrementar->id == buscar){
-			Libro_a_Incrementar->cantidad + incremento;
+			Libro_a_Incrementar->cantidad = Libro_a_Incrementar->cantidad + incremento;
+
 			printf("El nuevo stock del libro %d es: %d\n",Libro_a_Incrementar[i].id, Libro_a_Incrementar[i].cantidad);
 			break;
 		}else{ 
