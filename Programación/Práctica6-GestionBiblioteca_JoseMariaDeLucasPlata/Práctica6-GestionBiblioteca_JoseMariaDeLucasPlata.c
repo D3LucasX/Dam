@@ -49,12 +49,10 @@ void MostrarLibros(const Libro * libro_a_imprimir){
 
 void IdentificaLibro(const Libro * Catalogo) {
 	int buscar;
-	char SiNo = 'S';
+	int SiNo = 0;
 	do{
-	printf("¿Desea buscar un libro?");
-	scanf("%c", &SiNo);
-	
-	printf("\tIntroduzca el numero: \n");
+	printf("¿Que libro desea buscar?\n");
+	printf("\tIntroduzca el ID del libro: \n");
 	scanf("\t%d", &buscar);
 	for (int i = 0; i < 40; i++){
 		if(buscar == Catalogo[i].id){
@@ -63,10 +61,29 @@ void IdentificaLibro(const Libro * Catalogo) {
 		
 		}
 	}
-
-}while (SiNo == 'S');
+	printf("¿Desea buscar otro libro? (marque 1 si es que si, marque cualquier otra cosa si es que no)\n");
+	scanf("%d", &SiNo);
+}while (SiNo == 1);
 }
 
+void IncrementarStock(Libro * Libro_a_Incrementar){
+	int incremento = 0, buscar = 0;
+	
+	printf("¿Que libro desea buscar para incrementar el stock?\n");
+	printf("\tIntroduzca el ID del libro: \n");
+	scanf("\t%d", &buscar);
+	printf("¿Cuanto stock quieres añadir al libro?");
+	scanf("\t%d", &incremento);
+	for (int i = 0; i < 40; i++){
+		if(Libro_a_Incrementar->id == buscar){
+			Libro_a_Incrementar->cantidad + incremento;
+			printf("El nuevo stock del libro %d es: %d\n",Libro_a_Incrementar[i].id, Libro_a_Incrementar[i].cantidad);
+			break;
+		}else{ 
+			Libro_a_Incrementar->id + i;
+		}
+	}
+}
 
 
 
@@ -119,6 +136,7 @@ int main (){
 	MostrarLibros(libro);
 	MostrarLibro(&libro[i]);
 	IdentificaLibro(libro);
+	IncrementarStock(libro);
 
 
 	return EXIT_SUCCESS;
