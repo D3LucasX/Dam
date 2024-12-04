@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #define MAX_TITULO 50
 #define MAX_AUTOR 50
 /*
@@ -12,13 +13,14 @@
 /*Para en el codigo, no usar numeros por categorias, y usar los alias. 
 El numero 0 seria FICCION*/
 typedef enum{
-	FICCIÓN,
-	NO_FICCIÓN,
-	POESÍA,
-	TEATRO,
-	ENSAYO
+	FICCIÓN,    //0
+	NO_FICCIÓN, //1
+	POESÍA,     //2
+	TEATRO,     //3
+	ENSAYO      //4
 }Categoria;
 
+/*Un struct que guarda todo lo que debe de tener un libro*/
 typedef struct{
 	int id;
 	char titulo[MAX_TITULO];
@@ -29,34 +31,68 @@ typedef struct{
 }Libro;
 
 
-void MostrarLibro(const Libro * libro_a_imprimir){ //Pasamos por referencia para poder usarlo en otras funciones.
+void MostrarLibro(const Libro * libro_a_imprimir){ //Funcion que te imprime un libro, pasas como parámetro el puntero al primer libro. 
 		int i = 0;
-		printf("\tID: %d\n", libro_a_imprimir->id);
+		printf("\tID: %d\n", libro_a_imprimir->id);  // Ponemos la flecha para acceder al contenido de lo que viene despues de la flecha.
 		printf("\tTítulo: %s\n", libro_a_imprimir->titulo);
 		printf("\tAutor: %s\n", libro_a_imprimir->autor);
 		printf("\tPrecio: %.2f\n", libro_a_imprimir->precio);
-		printf("\tCategoria: %d\n", libro_a_imprimir->categoria);
+		switch(libro_a_imprimir->categoria){  //El enum guarda numeros enteros con un alias en cada uno, entonces si imprimes solo 
+											  //la categoria, te imprimiría el numero entero en vez del alias, para que te imprima
+											  //el alias, hacemos una condicional switch, en la que revisa el numero de la categoría
+											  // y por cada caso, imprimira el alias de cada categoria.
+		case 0:
+			printf("\tCategoría: FICCIÓN \n");
+			break;
+		case 1:
+			printf("\tCategoría: NO FICCIÓN\n");
+			break; 
+		case 2:
+			printf("\tCategoría: POESÍA\n");
+			break;
+		case 3:
+			printf("\tCategoría: TEATRO\n");
+			break;
+		case 4:
+			printf("\tCategoría: ENSAYO\n");
+			break;
+			default:
+			("\n");
+			break;
+		}
 		printf("\tStock: %d\n\n", libro_a_imprimir->cantidad);
-		i++;
+		
 	}
 
-void MostrarLibros(const Libro * libro_a_imprimir){
+void MostrarLibros(const Libro * libro_a_imprimir){ //Función que te imprime todo el catálogo de libros, pasando como parámetro un puntero al primer libro, de esta manera, entra un bucle for 
+													//que recorre todo el catálogo de libros, y llamamos a la función de Mostrar un libro, con el argumento de la dirección de memoria 
+													// de donde se encuentra el libro en la posición i, que sería la posición 0, asi va recorriendo e imprimiendo cada libro.
 	for(int i = 0; i < 40; i++){
 		printf("Libro numero %d.\n", i + 1);
 		MostrarLibro(&libro_a_imprimir[i]);
 	}
 }
 
-void IdentificaLibro(const Libro * Catalogo) {
+void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro por el ID.
+											   // Creamos una función pasando como parámetro un puntero a la primera posicion delstruct. en la que guardamos en una variable el numero del id que introduzca el usuario y 
+											   // dentro de un ciclo Do While mediante un bucle for, recorremos 
+											   // el array compàrando si el id del catalogo(num entero) es igual al id que introduzca el usuario (numero entero),
+											   // en caso de encontrarlo, ponemos un break para que salga del bucle for, y nos da la opcion de que si queremos buscar otro libro
+											   // opcion que guardara en otra variable, opción que comparará con la condicion del While, y en caso de ser correcto, te dejará
+											   // volver a buscar otro libro. 
 	int buscar;
 	int SiNo = 0;
 	do{
 	printf("¿Que libro desea buscar?\n");
-	printf("\tIntroduzca el ID del libro: \n");
-	scanf("\t%d", &buscar);
+	
+	while(buscar < 0 | buscar > 40){
+		printf("\tIntroduzca el ID del libro: \n");
+		scanf("\t%d", &buscar);
+		printf("introduce un valor válido.\n");
+	}
 	for (int i = 0; i < 40; i++){
-		if(buscar == Catalogo[i].id){
-			MostrarLibro(&Catalogo[i]);
+		if(buscar == Catalogo[i].id){ // Utilizamos el punto porque con los corchetes ya estamos accediendo al contenido.
+			MostrarLibro(&Catalogo[i]); // Accedemos a la direccion de memoria y con los corchetes accedemos al contenido de la posicion i.
 			break;
 		
 		}
@@ -66,30 +102,78 @@ void IdentificaLibro(const Libro * Catalogo) {
 }while (SiNo == 1);
 }
 
-void IncrementarStock(Libro * Libro_a_Incrementar){
+void IncrementarStock(Libro * Libro_a_Incrementar){ // Función que incrementa el stock de el libro que busques.
+													// Creamos una función que pasando como parámetro un puntero a la primera posición de un struct. En la función creamos dos variables en las que 
+													// guardaremos el incremento y otra en la que guardaremos el numero que nos de el usuario para buscar el libro por el id.
+													// Haremos un bucle for en el que recorreremos el catálogo y cuando encuentre el libro que queremos, le sumara el incremento.
+													// Cuando haya encontrado el libro y le haya sumado el incremento, utilizando un break, saldra del bucle for.
 	int incremento = 0, buscar = 0;
 	
 	printf("¿Que libro desea buscar para incrementar el stock?\n");
 	printf("\tIntroduzca el ID del libro: \n");
 	scanf("\t%d", &buscar);
-	printf("¿Cuanto stock quieres añadir al libro?");
+	printf("¿Cuanto stock quieres añadir al libro?\n");
 	scanf("\t%d", &incremento);
 	for (int i = 0; i < 40; i++){
-		if(Libro_a_Incrementar->id == buscar){
-			Libro_a_Incrementar->cantidad = Libro_a_Incrementar->cantidad + incremento;
-
+		if(Libro_a_Incrementar[i].id == buscar){  // No hace falta poner la flecha porque ya estamos accediendo a la direccion de memoria con los corchetes.
+			//(Libro_a_Incrementar+i)->id <--> Libro_a_Incrementar[i].id
+			//(*(Libro_a_Incrementar+i)).id <--> Libro_a_Incrementar[i].id
+			Libro_a_Incrementar[i].cantidad = Libro_a_Incrementar[i].cantidad + incremento; // Libro_a_Incrementar[i].cantidad + incremento; esto solo no funciona, por que el resultado de la suma
+																							// no lo guarda en ningún sitio.
 			printf("El nuevo stock del libro %d es: %d\n",Libro_a_Incrementar[i].id, Libro_a_Incrementar[i].cantidad);
 			break;
-		}else{ 
-			Libro_a_Incrementar->id + i;
+	}
+}
+}
+
+void BuscarPorCategoria(const Libro * CatalogoCategoria){  // Funcion que te filtra los libros por categoria y te los imprime.
+														   // Creamos una función en la que pasamos como parametro el puntero al primer libro del catálogo, te da la opcion de elegir 
+														   // la categoría y te da la opcion de salir que la implementamos con una condicion if, mediante un bucle for, recorremos todos
+														   // los libros, y comparamos la categoria introducida (número entero) con la categoría de ese libro (número entero), y en caso de ser iguales
+														   // llamamos a la funcion mostrar un libro, que te imprime ese libro de la categoría elegida y asi hasta que encuentre todos y los imprima 
+														   // todos, ya que si el libro que encuentra, no es de la categoria elegida, lo saltaremos gracias a un continue.
+	int buscar;
+	int SiNo = 0;
+
+	printf("¿Por qué categoria quieres filtrar?\n");
+	printf("\n");
+	printf("En caso de no querer, marque el '5'");
+	printf("Introduzca la cetegoría del libro(Marque el numero correspondiente a la categoría)\n");
+	printf("¿Que opcion desea realizar?\n\
+			0. Ficción\n\
+			1. No Ficción.\n\
+			2. Poesía.\n\
+			3. Teatro.\n\
+			4. Ensayo.\n\
+			5. Salir\n");
+	scanf("\t%d", &buscar);
+	if (buscar > 4){
+		return;
+	}
+	for (int i = 0; i < 40; i++){
+		if(buscar == CatalogoCategoria[i].categoria){
+			MostrarLibro(&CatalogoCategoria[i]); // Accedemos a la direccion de memoria del catalogo en la posicion i
+		}else{
+			continue;
 		}
 	}
 }
-
+void BuscarPorAutor(const Libro * FiltroPorAutor){
+	char autor_a_buscar[100]; // creamos una variable para almacenar el nombre que de el usuario.
+	printf("Escribe el nombre del autor.\n");
+	scanf(" %[^\n]", autor_a_buscar); // COn ese scanf almacenamos lo que el usuario introduzca sin contar espacios
+	for(int i = 0; i < 40; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
+		for(int j = 0; i < strlen(FiltroPorAutor[i].autor); j++){
+	if (strncmp(FiltroPorAutor[i].autor+j++, autor_a_buscar, strlen(autor_a_buscar)) == 0){
+		MostrarLibro(&FiltroPorAutor[i]); //Accedemos a la direccion de memoria del catalogo en la posicion i
+	}
+}
+}
+}
 
 
 int main (){
-	int i = 0;
+	int i = 0, opcion;
 
 	Libro libro[40] = {
 		{1, "To Kill a Mockingbird", "Harper Lee", 15.99, FICCIÓN, 10},
@@ -133,12 +217,42 @@ int main (){
         {39, "The Republic", "Plato", 16.00, ENSAYO, 6},
         {40, "Thus Spoke Zarathustra", "Friedrich Nietzsche", 14.99, ENSAYO, 10}
 	} ;
-
-	MostrarLibros(libro);
-	MostrarLibro(&libro[i]);
-	IdentificaLibro(libro);
-	IncrementarStock(libro);
-
+	printf("\n");
+	printf("Bienvenido a la Biblioteca Nacional de los Iulian Drakars\n");
+	printf("\n");
+	while(opcion != 5){
+	printf("Introduzca la opción de la acción que desee realizar:\n\
+			1. Mostrar todo el catálogo de libros.\n\
+			2. Buscar un libro por ID.\n\
+			3. Incrementar el stock de un libro.\n\
+			4. Filtrar por categoría.\n\
+			5. Filtrar por Autor.\n\
+			6. Salir\n");
+	scanf("%d", &opcion);
+	if (opcion > 6){
+		return 1;
+	}
+	switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
+		case 1:
+			MostrarLibros(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+			break;
+		case 2:
+			IdentificaLibro(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+			break; 
+		case 3:
+			IncrementarStock(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+			break;
+		case 4:
+			BuscarPorCategoria(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+			break;
+		case 5:
+			BuscarPorAutor(libro);
+			break;
+		default:
+			("\n");
+			break;
+		}
+	}
 
 	return EXIT_SUCCESS;
 
