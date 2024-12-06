@@ -80,27 +80,46 @@ void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro po
 											   // en caso de encontrarlo, ponemos un break para que salga del bucle for, y nos da la opcion de que si queremos buscar otro libro
 											   // opcion que guardara en otra variable, opción que comparará con la condicion del While, y en caso de ser correcto, te dejará
 											   // volver a buscar otro libro. 
-	int buscar;
-	int SiNo = 0;
-	do{
-	printf("¿Que libro desea buscar?\n");
-	
-	while(buscar < 0 | buscar > 40){
-		printf("\tIntroduzca el ID del libro: \n");
-		scanf("\t%d", &buscar);
-		printf("introduce un valor válido.\n");
-	}
-	for (int i = 0; i < 40; i++){
-		if(buscar == Catalogo[i].id){ // Utilizamos el punto porque con los corchetes ya estamos accediendo al contenido.
-			MostrarLibro(&Catalogo[i]); // Accedemos a la direccion de memoria y con los corchetes accedemos al contenido de la posicion i.
-			break;
-		
-		}
-	}
-	printf("¿Desea buscar otro libro? (marque 1 si es que si, marque cualquier otra cosa si es que no)\n");
-	scanf("%d", &SiNo);
-}while (SiNo == 1);
+	int buscar = -1;  // Inicializamos a un valor fuera del rango válido
+    int SiNo = 0;
+    
+    do { 
+        // Primer ciclo para validar que el ID sea válido
+        while (buscar < 0 || buscar > 40) { 
+        	//Lo dejamos dentro del do, para que en el while del Do-While sea el que nos indique si se repite todo otra vez.
+            printf("¿Que libro desea buscar?\n");
+            printf("\tIntroduzca el ID del libro: \n");
+            scanf("%d", &buscar);
+
+            if (buscar < 0 || buscar > 40) {
+                printf("Introduce un valor válido.\n");
+            }
+        }
+
+        // Buscar y mostrar el libro
+        int found = 0; // Indicador para saber si encontramos el libro
+        for (int i = 0; i < 40; i++) {
+            if (buscar == Catalogo[i].id) {
+                MostrarLibro(&Catalogo[i]);
+                break;
+            }
+        }
+        // Segundo ciclo para preguntar si desea buscar otro libro
+        printf("¿Desea buscar otro libro? (marque 1 si es que sí, marque cualquier otra cosa si es que no)\n");
+        scanf("%d", &SiNo);
+
+        // Resetear el valor de `buscar` si decide buscar otro libro
+        if (SiNo == 1) {
+            buscar = -1;  // Resetear el valor de buscar para que entre al primer `while` de nuevo, lo reseteamos con -1  y no con 0, ya que la condicion del primer
+            			  // 'while' siepre entrara con -1 y te dejara que indiques el ID del libro que quieres buscar, porque si hubiera un 0, entra dentro de la condicion
+            			  // y al ser 0, no se cumple, entonces procede a buscarte el libro 0, que no existe, y asi todo el rato.
+        }
+
+    } while (SiNo == 1);  // Se sigue repitiendo si SiNo es == 1
 }
+	
+
+
 
 void IncrementarStock(Libro * Libro_a_Incrementar){ // Función que incrementa el stock de el libro que busques.
 													// Creamos una función que pasando como parámetro un puntero a la primera posición de un struct. En la función creamos dos variables en las que 
@@ -161,11 +180,25 @@ void BuscarPorCategoria(const Libro * CatalogoCategoria){  // Funcion que te fil
 void BuscarPorAutor(const Libro * FiltroPorAutor){
 	char autor_a_buscar[100]; // creamos una variable para almacenar el nombre que de el usuario.
 	printf("Escribe el nombre del autor.\n");
-	scanf(" %[^\n]", autor_a_buscar); // COn ese scanf almacenamos lo que el usuario introduzca sin contar espacios
+	scanf(" %[^\n]", autor_a_buscar); // COn ese scanf almacenamos lo que el usuario introduzca sin contar espacios usando %[^\n]
 	for(int i = 0; i < 40; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
-		for(int j = 0; i < strlen(FiltroPorAutor[i].autor); j++){
-	if (strncmp(FiltroPorAutor[i].autor+j++, autor_a_buscar, strlen(autor_a_buscar)) == 0){
+		for(int j = 0; FiltroPorAutor[i].autor[j] != '\0'; j++){ //De esta manera cuando llegue al \0 dejara de aumentar.
+
+	if (strncmp(&FiltroPorAutor[i].autor[j], autor_a_buscar, strlen(autor_a_buscar)) == 0){ //comparamos con 0 para que ejecute el bloque si son iguales las cadenas de caracteres.
+
+		// Con strncmp lo que hacemos es que comparamos las primeras posiciones de dos cadenas de caracteres con X caracteres.
+		// Para ello es necesario pasarle dos punteros apuntando al primer caracter de ambas cadenas a comparar, como FiltroPorAutor[i].autor[j] no es 
+		// un puntero, por que le estamos indicando el caracter en si, con la posicion 'j', hay que añadirle el '&' para que le pases la direccion de 
+		// memoria del primer caracter, si no coincide y FiltroPorAutor[i].autor[j] es distinto de \o, j aumenta, entonces comparara desde la direccion
+		// de memoria de j + 1 y asi hasta que llegue al \0 que entonces saldra de el bucle interno.
+		// Por otro lado autor_a_buscar ya es un puntero al primer caracter de la cadena de caracteres, por eso cuando el usuario lo escribe en
+		// el scanf, no hace falta guardarlo en una variable con el '&'.
+		// Y finalmente tenemos el numero de caracteres que queremos que se comparen, que en este caso sera el numero de caracteres que tenga autor_a_buscar.
+		
 		MostrarLibro(&FiltroPorAutor[i]); //Accedemos a la direccion de memoria del catalogo en la posicion i
+		break; // Si nos encuentra al libro del autor, nos lo imprime y sale del subbucle.
+	}else{
+		continue; //Si no lo encuentra, continua.
 	}
 }
 }
@@ -229,7 +262,7 @@ int main (){
 			5. Filtrar por Autor.\n\
 			6. Salir\n");
 	scanf("%d", &opcion);
-	if (opcion > 6){
+	if (opcion > 5){
 		return 1;
 	}
 	switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
