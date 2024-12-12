@@ -1,0 +1,84 @@
+h1{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: blue;
+	font-weight: bold;
+}
+h2{
+	color: white;
+}
+p{
+	font-family: "Century Gothic";
+}
+#caja1{
+	background-color: yellow;
+	padding: 10px;
+}
+#caja2{
+	background-color: pink;
+	display: flex; /* Activamos Flexbox */
+	justify-content: space-between; /* Distribuye las cajas a la izquierda, centro y derecha */
+	width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+	gap: 10pt;
+	padding: 0;
+}
+#caja3{
+	background-color: green;
+	display: grid; /*Para que se coloquen en modo cuadrícula*/
+	grid-template-columns: 1fr 1fr; /*Así decimos que haya solo dos columnas*/
+	gap: 10px; /*Le decimos que entre columnas haya un espacio de 10 pixeles*/
+	justify-content: stretch; /*Que se mantenga como está*/
+}
+.cajaNaranja {
+	background-color: orange;
+	width: 33%; /* Cada caja ocupa un 33% del ancho */
+	padding: 10px;
+	margin: 0 px; /* 0px de margen entre las cajas */
+	box-sizing: border-box; /* Para incluir el padding dentro del ancho */
+	border-radius: 5px; /* Bordes redondeados */
+	font-family: Arial, Helvetica, sans-serif;
+	overflow: hidden; /* Asegura que nada se desborde de la caja */
+
+}
+.cajaNaranja ul, .cajaNaranja li {
+	font-family: Arial, Helvetica, sans-serif; /* Aseguramos que el font-family sea consistente */
+}
+.cajaNaranja p {
+	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 15px; /* Añadimos un margen inferior para separar los párrafos */
+	font-size: 11pt;
+
+}
+.cajaNaranja ul {
+	list-style-position: inside; /* Hace que los puntos estén dentro de la caja */
+	padding-left: 0; /* Elimina el padding extra de la izquierda */
+}
+
+.cajaNaranja li {
+	display: list-item; /* Asegura que los elementos de la lista se comporten como elementos de lista */
+	padding-left: 15px; /* Añade un poco de espacio a la izquierda de cada ítem */
+}
+
+.cajaMorada{
+	background-color: blueviolet;
+	padding: 10px;
+}
+
+#cajaMorada{
+	background-color: blueviolet;
+	padding: 10px;
+	grid-column: 1/3; /*El numero de columnas que va a ocupar *Se mide en rayas que tiene la tabla, en este caso como solo tiene dos columnas, pues tiene 3 rayas, la de la derecha, la del centro ty la de la izquierda*/
+	display: flex;
+	flex-direction: column; 
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+
+#cajaMorada p{
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 9px;
+	color:black;
+}

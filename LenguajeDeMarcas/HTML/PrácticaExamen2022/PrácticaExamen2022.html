@@ -1,0 +1,103 @@
+<DOCTYPE html>
+<html lang="es">
+	<head>
+		<tittle>Examen de 2022</tittle>
+		<link rel="stylesheet" href="estiloExamen.css">
+	</head>
+	<body>
+		<div id="caja1">
+			<h1>CABECERA(h1)</h1>
+			<p>Los títulos h1 son de la familia Arial y son de tamaño 28pt y negrita, el color de los titulos es azul.</p>
+			<p>Esta cabecera es de color amarillo y las cajas de anajo de esya caja están alineadas con flex. Esta caja está en la cabecera pero solo contiene el texto. Las cajas contenedoras a las que afecta flex son naranjas
+			la caja que las contiene rosa, las cajas tiene la propiedad que las hace que esten alineadas y hay un hueco
+			</p>
+		</div>
+		<div id="caja2">
+			<div class="cajaNaranja">
+				<p>Las listas y los parrafos de los divs que estén contenidos en la cabecera serán de la familia Arial como h1 pero de tamaño 12
+
+				</p>
+				<p>Elementos que hay que tener en cuenta</p>
+				<ul>
+					<li>cerrar bien los divs</li>
+					<li>Tened cuidado con la posicion</li>
+				</ul>
+			</div>
+			<div class="cajaNaranja">
+				<p>Estos textos de ejemplo, recuerda que no se puede poner la etiqueta br a no ser que la necesites para algo. Y que aunque sean de ejemplo, debes ponerlo típo párrafo</p>
+			</div>
+			<div class="cajaNaranja">
+				<p>Estos textos de ejemplo, recuerda que no se puede poner la etiqueta br a no ser que la necesites para algo. Y que aunque sean de ejemplo, debes ponerlo típo párrafo</p>
+			</div>
+		</div>
+		<div id="caja3">
+			<div class="cajaMorada">
+				<h2>GUIA PARA ESTA PARTE</h2>
+				<p>h2 es de color blanco, lo demás lo dejamos por defecto</p>
+				<p>En esta caja hay tres cajas que se van a alinear con grid, 
+				la cuadricula a crear de 4x4, la primera caja ocupa toda la familiade arriba. haced las cajas con facciones, por ejemplo, con una facció
+				La caja central es verde y las distintas cajas son moradas. Añadimos padding 10 pt y justificamos texto.
+				</p>
+			</div>
+			<div class="cajaMorada">
+				<P>Tu nombre: <input type="text" name="Nombre"></P>
+				<P>Tu direccion de correo: <input type="mail" name="correo"></P>
+				<P>Selecciona como te ha salido: <br>
+				<input type="radio" name="resultado" value="bien"> Bien<br>
+				<input type="radio" name="resultado" value="mal"> Mal<br>
+				<input type="radio" name="resultado" value="regular"> Regular<br>
+
+				</P>
+				<P>Las opciones del desplegable son JavaScript, PHP, Java, C#, C++</P>
+				<form action="#">
+					<select name="lenguajes" id="lenguajes">
+						<option value="javascript">JavaScript</option>
+						<option value="php">PHP</option>
+						<option value="java">Java</option>
+						<option value="#C">#C</option>
+						<option value="C++">C++</option>
+					</select>
+					<input type="submit" value="enviar">
+				</form>
+			</div>
+			<div id="cajaMorada">
+				<p>Ejemplo de fusón de celdas</p>
+				<table border="1">
+					<tr>
+						<td>Fusión de celdas</td>
+						<th>Columna 1</th>
+						<th>Columna 2</th>
+						<th>Columna 3</th>
+						<th>Columna 4</th>
+						<th>Columna 5</th>
+					</tr>
+					<tr>
+						<th>Fila 1</th>
+						<td rowspan="2">A</td>
+						<td colspan="2">B</td>
+						<td colspan="2">C</td>
+
+					</tr>
+					<tr>
+						<th>Fila 2</th>
+						<td rowspan="2">D</td>
+						<td colspan="2">E</td>
+						<td rowspan="2">F</td>
+					</tr>
+					<tr>
+						<th>Fila 3</th>
+						<td rowspan="2">G</td>
+						<td colspan="2" rowspan="2">H</td>
+					</tr>
+					<tr>
+						<th>Fila 4</th>
+						<td>I</td>
+						<td>J</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</body>
+</html>
+
