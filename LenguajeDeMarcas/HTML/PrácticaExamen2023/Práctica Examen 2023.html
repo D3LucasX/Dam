@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="estiloExamen2023.css">
+    <title>EJERCICIO DE EJEMPLO DE EXAMEN</title>
+</head>
+<body>
+    <div id="cajaPadre">
+        <div id="cajaHijo1">
+        <div class="cajaVerde">
+            <h1>Ejemplo de elementos en HTML 1</h1>
+        </div>
+        <div class="cajaAmarilla">
+            <h3>Normas de examen</h3>
+            <p>Para realizar este examen debes de consultar la hoja explicativa, 
+                tienes aproximadamente 2 horas para realizarlo ya que hay varias partes que realizar</p>                
+        </div>
+        <div class="cajaAmarilla">
+            <h3>Consejos prácticos</h3>
+            <ul>
+                <li>Primero realiza el posicionamiento de las cajas con el 
+                    estilo</li>
+                <li>Después ocúpate de los elementos de HTML</li>
+                <li>No utilices internet, ya que en el examen no lo puedes utilizar</li>
+                <li>Utiliza un cronómetro para medir el tiempo que utilizes ¡SUERTE!</li>
+            </ul>                
+        </div>
+        <div class="cajaTurquesa">
+            <h3>Formilario básico</h3>
+            <p>Nombre del Alumno:</p> <input class="mediano" type="text">
+            <p>Fecha de Examen</p><input type="date">
+            <p>Sexo:</p> <input type="radio" name="opcion"> Hombre <input type="radio" name="opcion"> Mujer
+            <input type="submit" value="enviar"><input type="reset" value="Borrar">
+        </div>
+    </div>
+    <div id="cajaHijo2">
+        <div class="cajaVerde">
+            <h1>Ejemplo de elementos HTML 2</h1>
+        </div>
+        <div class="cajaAmarilla">
+            <h3>Lista sin enumerar</h3>
+            <ul>
+                <li>Lista con un circulo</li>
+                <li>Lista con un cuadrado</li>
+                <li>Lista con un punto</li>
+            </ul>
+        </div>
+        <div class="cajaAmarilla">
+            <h3>Lista numerada</h3>
+            <ul>
+                <li>Lista con letras mayúsculas</li>
+                <li>Lista con números romanos</li>
+                <li>lISta con números por defecto</li>
+            </ul>
+        </div>
+        
+        <div class="cajaAmarilla">
+            <h3>Tabla sencilla</h3>
+            <table border="1px">
+            <tr>
+                <td>Celda 1</td>
+                <td>Celda 2</td>
+            </tr>
+            <tr>
+                <td>Celda 3</td>
+                <td>Celda 4</td>
+            </tr>
+        </table>
+        </div>
+        <div class="cajaAmarilla">
+            <h3>Celdas combinadas</h3>
+            <table border="1px">
+            <tr>
+                <td colspan="2">Celda 1</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Celda 2</td>
+                <td>Celda 3</td>
+            </tr>
+            <tr>
+                <td>Celda 4</td>
+            </tr>
+        </table>
+        </div>
+    </div>
+    </div>
+<footer>pie</footer>
+</body>
+</html>

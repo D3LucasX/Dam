@@ -1,0 +1,46 @@
+
+#cajaPadre{
+    background-color: blue;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+ #cajaHijo1{
+    flex: 1;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+ }
+ #cajaHijo2{
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+ }
+
+.cajaVerde{
+    background-color: green;
+    grid-column: span 2;
+    padding: 10px;
+}
+
+.cajaAmarilla{
+    background-color: yellow;
+    padding: 10px;
+}
+
+.cajaTurquesa{
+    background-color: aquamarine;
+    grid-column: span 2;
+    padding: 10px;
+}
+
+footer{
+    background-color: pink;
+    text-align: center;
+}
