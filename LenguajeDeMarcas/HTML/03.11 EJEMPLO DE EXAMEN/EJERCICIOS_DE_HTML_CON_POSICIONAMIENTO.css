@@ -1,6 +1,73 @@
 #cajaPadre{
-    
+    background-color: white;
+    width: 100vw;
+    height: 100vw;
 }
+
 #cajaAmarilla{
     background-color: yellow;
+    float: left;
+    width: 50vw;
+    height: 33vh;
+}
+.cajaNaranja{
+    background-color: orange;
+}
+
+h1{
+    text-align: center;
+}
+p{
+    padding: 10px;
+}
+
+#cajaAzul{
+    background-color: blue;
+    float: left;
+    width: 50vw;
+    height: 33vh;
+}
+
+#cajaRosa{
+    background-color: pink;
+    float: left;
+    width: 100vw;
+    padding-top: 10px;
+    padding-top: 0px;
+}
+
+table{
+    background-color: purple;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+    border: solid black;
+
+    
+}
+
+#cajaVerde{
+    background-color: green;
+    float: right;
+    width: 50vw;
+    height: 33vh;
+
+}
+
+form{
+    padding-left: 10px;
+}
+
+input[type="submit"], input[type="reset"] {
+    width: auto; /* Los botones de enviar y borrar no ocuparán todo el ancho */
+    margin: 5px 10px 10px 0; /* Agrega algo de espacio entre los botones */
+    display: inline-block; /* Hace que los botones se alineen uno al lado del otro */
+    padding-left: 10px;
+}
+
+a{
+    border: 1px solid white;
+    background-color: aquamarine;
+    padding: 5px;
 }
