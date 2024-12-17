@@ -205,8 +205,12 @@ void BuscarPorAutor(const Libro * FiltroPorAutor){
 }
 
 
-int main (){
+int main (int argc, char *argv[]){
 	int i = 0, opcion;
+	if (argc < 2) {
+        printf("Uso: %s <opción>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
 
 	Libro libro[40] = {
 		{1, "To Kill a Mockingbird", "Harper Lee", 15.99, FICCIÓN, 10},
@@ -250,6 +254,33 @@ int main (){
         {39, "The Republic", "Plato", 16.00, ENSAYO, 6},
         {40, "Thus Spoke Zarathustra", "Friedrich Nietzsche", 14.99, ENSAYO, 10}
 	} ;
+
+	if (argc < 2) {
+        printf("Debe proporcionar el nombre de la función como argumento.\n");
+        return 1;
+    }
+    else if (strcmp(argv[1], "MostrarLibros") == 0) {
+        MostrarLibros(libro);
+    }
+    else if (strcmp(argv[1], "IdentificaLibro") == 0) {
+		IdentificaLibro(libro);
+
+	}
+    else if (strcmp(argv[1], "IncrementarStock") == 0) {
+        IncrementarStock(libro);
+    }
+    else if (strcmp(argv[1], "BuscarPorCategoria") == 0) {
+        BuscarPorCategoria(libro);
+    }
+    else if (strcmp(argv[1], "BuscarPorAutor") == 0) {
+        BuscarPorAutor(libro);
+    }
+    else{
+        printf("Función no reconocida: %s\n", argv[1]);
+        return 1;
+    }
+
+
 	printf("\n");
 	printf("Bienvenido a la Biblioteca Nacional de los Iulian Drakars\n");
 	printf("\n");
