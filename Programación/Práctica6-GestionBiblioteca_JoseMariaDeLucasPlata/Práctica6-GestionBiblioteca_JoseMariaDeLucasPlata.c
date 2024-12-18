@@ -73,6 +73,18 @@ void MostrarLibros(const Libro * libro_a_imprimir){ //Función que te imprime to
 	}
 }
 
+
+void IdentificaLibroPorId(const Libro * Catalogo,int id_a_buscar){
+	// TODO: completar
+        for (int i = 0; i < 40; i++) {
+            if (id_a_buscar == Catalogo[i].id) {
+                MostrarLibro(&Catalogo[i]);
+                break;
+            }
+        }
+}
+
+
 void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro por el ID.
 											   // Creamos una función pasando como parámetro un puntero a la primera posicion delstruct. en la que guardamos en una variable el numero del id que introduzca el usuario y 
 											   // dentro de un ciclo Do While mediante un bucle for, recorremos 
@@ -97,13 +109,14 @@ void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro po
         }
 
         // Buscar y mostrar el libro
-        int found = 0; // Indicador para saber si encontramos el libro
+		IdentificaLibroPorId(Catalogo,buscar);
+        /*int found = 0; // Indicador para saber si encontramos el libro
         for (int i = 0; i < 40; i++) {
             if (buscar == Catalogo[i].id) {
                 MostrarLibro(&Catalogo[i]);
                 break;
             }
-        }
+        }*/
         // Segundo ciclo para preguntar si desea buscar otro libro
         printf("¿Desea buscar otro libro? (marque 1 si es que sí, marque cualquier otra cosa si es que no)\n");
         scanf("%d", &SiNo);
@@ -120,7 +133,18 @@ void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro po
 	
 
 
-
+void IncrementarLDC(Libro * Libro_a_Incrementar, int id, int incremento){
+	for (int i = 0; i < 40; i++){
+		if(Libro_a_Incrementar[i].id == id){  // No hace falta poner la flecha porque ya estamos accediendo a la direccion de memoria con los corchetes.
+			//(Libro_a_Incrementar+i)->id <--> Libro_a_Incrementar[i].id
+			//(*(Libro_a_Incrementar+i)).id <--> Libro_a_Incrementar[i].id
+			Libro_a_Incrementar[i].cantidad = Libro_a_Incrementar[i].cantidad + incremento; // Libro_a_Incrementar[i].cantidad + incremento; esto solo no funciona, por que el resultado de la suma
+																							// no lo guarda en ningún sitio.
+			printf("El nuevo stock del libro %d es: %d\n",Libro_a_Incrementar[i].id, Libro_a_Incrementar[i].cantidad);
+			break;
+	}
+}
+}
 void IncrementarStock(Libro * Libro_a_Incrementar){ // Función que incrementa el stock de el libro que busques.
 													// Creamos una función que pasando como parámetro un puntero a la primera posición de un struct. En la función creamos dos variables en las que 
 													// guardaremos el incremento y otra en la que guardaremos el numero que nos de el usuario para buscar el libro por el id.
@@ -133,7 +157,7 @@ void IncrementarStock(Libro * Libro_a_Incrementar){ // Función que incrementa e
 	scanf("\t%d", &buscar);
 	printf("¿Cuanto stock quieres añadir al libro?\n");
 	scanf("\t%d", &incremento);
-	for (int i = 0; i < 40; i++){
+	/*for (int i = 0; i < 40; i++){
 		if(Libro_a_Incrementar[i].id == buscar){  // No hace falta poner la flecha porque ya estamos accediendo a la direccion de memoria con los corchetes.
 			//(Libro_a_Incrementar+i)->id <--> Libro_a_Incrementar[i].id
 			//(*(Libro_a_Incrementar+i)).id <--> Libro_a_Incrementar[i].id
@@ -142,7 +166,17 @@ void IncrementarStock(Libro * Libro_a_Incrementar){ // Función que incrementa e
 			printf("El nuevo stock del libro %d es: %d\n",Libro_a_Incrementar[i].id, Libro_a_Incrementar[i].cantidad);
 			break;
 	}
+}*/
+	IncrementarLDC(Libro_a_Incrementar, buscar, incremento);
 }
+void FiltraPorCategoria(const Libro * Catalogo, int categoria){
+		for (int i = 0; i < 40; i++){
+		if(categoria == Catalogo[i].categoria){
+			MostrarLibro(&Catalogo[i]); // Accedemos a la direccion de memoria del catalogo en la posicion i
+		}else{
+			continue;
+		}
+	}
 }
 
 void BuscarPorCategoria(const Libro * CatalogoCategoria){  // Funcion que te filtra los libros por categoria y te los imprime.
@@ -169,19 +203,36 @@ void BuscarPorCategoria(const Libro * CatalogoCategoria){  // Funcion que te fil
 	if (buscar > 4){
 		return;
 	}
-	for (int i = 0; i < 40; i++){
-		if(buscar == CatalogoCategoria[i].categoria){
-			MostrarLibro(&CatalogoCategoria[i]); // Accedemos a la direccion de memoria del catalogo en la posicion i
-		}else{
-			continue;
-		}
+	FiltraPorCategoria(CatalogoCategoria, buscar);
+}
+void FiltrarPorAutor(const Libro * Catalogo, char autor_a_buscar[100]){
+	for(int i = 0; i < 40; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
+		for(int j = 0; Catalogo[i].autor[j] != '\0'; j++){ //De esta manera cuando llegue al \0 dejara de aumentar.
+
+	if (strncmp(&Catalogo[i].autor[j], autor_a_buscar, strlen(autor_a_buscar)) == 0){ //comparamos con 0 para que ejecute el bloque si son iguales las cadenas de caracteres.
+
+		// Con strncmp lo que hacemos es que comparamos las primeras posiciones de dos cadenas de caracteres con X caracteres.
+		// Para ello es necesario pasarle dos punteros apuntando al primer caracter de ambas cadenas a comparar, como FiltroPorAutor[i].autor[j] no es 
+		// un puntero, por que le estamos indicando el caracter en si, con la posicion 'j', hay que añadirle el '&' para que le pases la direccion de 
+		// memoria del primer caracter, si no coincide y FiltroPorAutor[i].autor[j] es distinto de \o, j aumenta, entonces comparara desde la direccion
+		// de memoria de j + 1 y asi hasta que llegue al \0 que entonces saldra de el bucle interno.
+		// Por otro lado autor_a_buscar ya es un puntero al primer caracter de la cadena de caracteres, por eso cuando el usuario lo escribe en
+		// el scanf, no hace falta guardarlo en una variable con el '&'.
+		// Y finalmente tenemos el numero de caracteres que queremos que se comparen, que en este caso sera el numero de caracteres que tenga autor_a_buscar.
+		
+		MostrarLibro(&Catalogo[i]); //Accedemos a la direccion de memoria del catalogo en la posicion i
+		break; // Si nos encuentra al libro del autor, nos lo imprime y sale del subbucle.
+	}else{
+		continue; //Si no lo encuentra, continua.
 	}
+}
+}
 }
 void BuscarPorAutor(const Libro * FiltroPorAutor){
 	char autor_a_buscar[100]; // creamos una variable para almacenar el nombre que de el usuario.
 	printf("Escribe el nombre del autor.\n");
 	scanf(" %[^\n]", autor_a_buscar); // COn ese scanf almacenamos lo que el usuario introduzca sin contar espacios usando %[^\n]
-	for(int i = 0; i < 40; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
+	/*r(int i = 0; i < 40; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
 		for(int j = 0; FiltroPorAutor[i].autor[j] != '\0'; j++){ //De esta manera cuando llegue al \0 dejara de aumentar.
 
 	if (strncmp(&FiltroPorAutor[i].autor[j], autor_a_buscar, strlen(autor_a_buscar)) == 0){ //comparamos con 0 para que ejecute el bloque si son iguales las cadenas de caracteres.
@@ -201,8 +252,10 @@ void BuscarPorAutor(const Libro * FiltroPorAutor){
 		continue; //Si no lo encuentra, continua.
 	}
 }
+}*/
+	FiltrarPorAutor(FiltroPorAutor, autor_a_buscar);
 }
-}
+
 
 
 int main (int argc, char *argv[]){
@@ -211,6 +264,7 @@ int main (int argc, char *argv[]){
         printf("Uso: %s <opción>\n", argv[0]);
         return EXIT_FAILURE;
     }
+    Libro * libro = (Libro*) malloc(Cant_Libros * sizeof(Libro));
 
 	Libro libro[40] = {
 		{1, "To Kill a Mockingbird", "Harper Lee", 15.99, FICCIÓN, 10},
@@ -255,70 +309,92 @@ int main (int argc, char *argv[]){
         {40, "Thus Spoke Zarathustra", "Friedrich Nietzsche", 14.99, ENSAYO, 10}
 	} ;
 
-	if (argc < 2) {
-        printf("Debe proporcionar el nombre de la función como argumento.\n");
+
+	/* argv son las DIRECCIONES DE MEMORIA que se asocian a cada argumento */
+	/* argc son l a cantidad de elementos que quieres pedir */
+	if (argc < 0){
+		printf("Debe proporcionar el nombre de la función como argumento.\n");
         return 1;
-    }
-    else if (strcmp(argv[1], "MostrarLibros") == 0) {
-        MostrarLibros(libro);
-    }
-    else if (strcmp(argv[1], "IdentificaLibro") == 0) {
-		IdentificaLibro(libro);
-
-	}
-    else if (strcmp(argv[1], "IncrementarStock") == 0) {
-        IncrementarStock(libro);
-    }
-    else if (strcmp(argv[1], "BuscarPorCategoria") == 0) {
-        BuscarPorCategoria(libro);
-    }
-    else if (strcmp(argv[1], "BuscarPorAutor") == 0) {
-        BuscarPorAutor(libro);
-    }
-    else{
-        printf("Función no reconocida: %s\n", argv[1]);
-        return 1;
-    }
-
-
-	printf("\n");
-	printf("Bienvenido a la Biblioteca Nacional de los Iulian Drakars\n");
-	printf("\n");
-	while(opcion != 5){
-	printf("Introduzca la opción de la acción que desee realizar:\n\
-			1. Mostrar todo el catálogo de libros.\n\
-			2. Buscar un libro por ID.\n\
-			3. Incrementar el stock de un libro.\n\
-			4. Filtrar por categoría.\n\
-			5. Filtrar por Autor.\n\
-			6. Salir\n");
-	scanf("%d", &opcion);
-	if (opcion > 5){
-		return 1;
-	}
-	switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
-		case 1:
-			MostrarLibros(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
-			break;
-		case 2:
-			IdentificaLibro(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
-			break; 
-		case 3:
-			IncrementarStock(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
-			break;
-		case 4:
-			BuscarPorCategoria(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
-			break;
-		case 5:
-			BuscarPorAutor(libro);
-			break;
-		default:
-			("\n");
-			break;
+	}else if (argc == 1){
+		printf("***********************************************************\n");
+		printf("*Bienvenido a la Biblioteca Nacional de los Iulian Drakars* \n");
+		printf("***********************************************************\n");
+		while(opcion != 5){
+		printf("Introduzca la opción de la acción que desee realizar:\n\
+				1. Mostrar todo el catálogo de libros.\n\
+				2. Buscar un libro por ID.\n\
+				3. Incrementar el stock de un libro.\n\
+				4. Filtrar por categoría.\n\
+				5. Filtrar por Autor.\n\
+				6. Salir\n");
+				scanf("%d", &opcion);
+				if (opcion > 5){
+				return 1;
+			}
+				switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
+				case 1:
+					MostrarLibros(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					break;
+				case 2:
+					IdentificaLibro(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					break; 
+				case 3:
+					IncrementarStock(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					break;
+				case 4:
+					BuscarPorCategoria(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					break;
+				case 5:
+					BuscarPorAutor(libro);
+					break;
+				default:
+					("\n");
+				break;
 		}
 	}
+	}else if (argc == 2) {
+		if (strcmp(argv[1], "Mostrar") == 0) {
+        MostrarLibros(libro);
+    }
+	}else if(argc == 3){ 
+    	if(strcmp(argv[1], "IdentificarLibro") == 0) {
+			int id_a_buscar = atoi (argv[2]);
+			/*Nueva funcion*/
+			IdentificaLibroPorId(libro, id_a_buscar);
+			return 1;
+		}else if(strcmp(argv[1], "categoria") == 0){
+			int categoria = atoi (argv[2]);
+			FiltraPorCategoria(libro, categoria);
+		}else if(strcmp(argv[1], "autor") == 0){
+
+			//Otra manera de hacerlo.
+			/*char  autor_a_buscar[100];
+			scrpcy(autor_a_buscar,argv[2]);*/
+
+			char  * autor_a_buscar = argv[2];
+			/*Lo que hacemos es que creamos un puntero al primer caracter de 
+			argv[2] para que apunte al primer caracter de argv[2] */
+			/* Porque cuando ponemos autor_a_buscar[100] esta reservado en memoria estatica, 
+			y argv[2], reserva en memoria dinámica, no esta en el mismo sitio, y eso a C
+			no le gusta, por eso no podemos hacer char autor_a_buscar = argv[2]; */
+			// Controlar algún error.
+			FiltrarPorAutor(libro, autor_a_buscar);
+			//Otra manera de hacerlo, pero no es la mas recomendable, ya que puede llevar a errores.
+			/*FiltrarPorAutor(libro, argv[2]);*/
+		}else{
+			printf("Función no reconocida: %s\n", argv[1]);
+		}
+
+	}else if (argc == 4){
+		if(strcmp(argv[1], "stock") == 0) {
+			int id_a_buscar = atoi (argv[2]);
+			int cantidad_a_incrementar = atoi (argv[3]);
+        	IncrementarLDC(libro, id_a_buscar, cantidad_a_incrementar);
+    }else{
+        printf("Función no reconocida: %s\n", argv[1]);
+        return 1;
 
 	return EXIT_SUCCESS;
 
 }
-
+}
