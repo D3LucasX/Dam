@@ -64,10 +64,10 @@ void MostrarLibro(const Libro * libro_a_imprimir){ //Funcion que te imprime un l
 		
 	}
 
-void MostrarLibros(const Libro * libro_a_imprimir){ //Función que te imprime todo el catálogo de libros, pasando como parámetro un puntero al primer libro, de esta manera, entra un bucle for 
+void MostrarLibros(const Libro * libro_a_imprimir, int total_libros){ //Función que te imprime todo el catálogo de libros, pasando como parámetro un puntero al primer libro, de esta manera, entra un bucle for 
 													//que recorre todo el catálogo de libros, y llamamos a la función de Mostrar un libro, con el argumento de la dirección de memoria 
 													// de donde se encuentra el libro en la posición i, que sería la posición 0, asi va recorriendo e imprimiendo cada libro.
-	for(int i = 0; i < 40; i++){
+	for(int i = 0; i < total_libros; i++){
 		printf("Libro numero %d.\n", i + 1);
 		MostrarLibro(&libro_a_imprimir[i]);
 	}
@@ -256,7 +256,7 @@ void BuscarPorAutor(const Libro * FiltroPorAutor){
 	FiltrarPorAutor(FiltroPorAutor, autor_a_buscar);
 }
 
-void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float precio, int categoria, int cantidad, int * total_libros){
+void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float precio, int categoria, int cantidad, int total_libros){
 	direccion -> id= id;
 	strcpy(direccion -> titulo, titulo);
 	strcpy(direccion -> autor, autor);
@@ -264,26 +264,46 @@ void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float
 	direccion -> categoria = categoria;
 	direccion -> cantidad = cantidad;
 
-	total_libros += 1;
+	total_libros ++;
 }
 
-void PedirLibro(Libro* catalogo, int * total_libros){
+Libro PedirLibro(Libro* catalogo, int * total_libros){
 	Libro Libro_Nuevo;
 
-	catalogo = (Libro*) realloc (catalogo ,(*(total_libros) + 1) * sizeof(Libro));
-	Libro_Nuevo.id = (*(total_libros)) + 1;
-	printf("¿Cuál es el titulo del nuevo libro?");
-	fgets(Libro_Nuevo.titulo, 50, stdin);
-	printf("Escribe el nombre del autor.");
-	fgets(Libro_Nuevo.autor, 50, stdin);
-	printf("Introduzca el precio.");
-	scanf("%f", &Libro_Nuevo.precio);
-	printf("Introduzca la categoria.");
-	scanf("%u", &Libro_Nuevo.categoria);
-	printf("¿Cual es el stock total del libro?");
-	scanf("%d", &Libro_Nuevo.cantidad);
+	Libro* temp = (Libro*) realloc (*catalogo ,(*(total_libros) + 1) * sizeof(Libro));
+	if (temp == NULL) {
+        printf("Error al reasignar memoria\n");
+        return; // Salir si realloc falla
+    }
+     // Si realloc fue exitoso, actualizamos catalogo
+    *catalogo = temp;
 
-	inicializarLibro(&catalogo[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
+	Libro_Nuevo.id = (*total_libros) + 1;
+
+
+	printf("¿Cuál es el titulo del nuevo libro?\n");
+	scanf(" %[^\n]", Libro_Nuevo.titulo);
+
+	printf(" Escribe el nombre del autor.\n");
+	scanf(" %[^\n]", Libro_Nuevo.autor);
+
+	printf("Introduzca el precio:\n");
+	scanf("%f", &Libro_Nuevo.precio);
+	getchar();
+
+	printf("Introduzca la categoria:\n");
+	scanf("%u", &Libro_Nuevo.categoria);
+	getchar();
+
+	printf("¿Cual es el stock total del libro?\n");
+	scanf("%d", &Libro_Nuevo.cantidad);
+	getchar();
+
+	inicializarLibro(&(*catalogo)[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, (*(total_libros)));
+
+
+	printf("Nuevo libro añadido: %s por %s\n", (*catalogo)[*total_libros - 1].titulo, (*catalogo)[*total_libros - 1].autor);
+	return Libro_Nuevo;
 }
 
 
@@ -293,7 +313,7 @@ int main (int argc, char *argv[]){
 
 	/*Lo que hacemos es crear una variable que inicializamos en 0, para que en la funcion vaya 
 	sumando uno cada vez que se inicialize un libro, de esta manera sabemos cuantos libros hay.*/
-	int *total_libros = 0;
+	int total_libros = 0;
 	
 
 	if (argc < 2) {
@@ -368,14 +388,15 @@ int main (int argc, char *argv[]){
 				3. Incrementar el stock de un libro.\n\
 				4. Filtrar por categoría.\n\
 				5. Filtrar por Autor.\n\
-				6. Salir\n");
+				6. Añadir Libro.\n\
+				7. Salir\n");
 				scanf("%d", &opcion);
 				if (opcion > 6){
 				return 1;
 			}
 				switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
 				case 1:
-					MostrarLibros(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					MostrarLibros(libro, total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
 					break;
 				case 2:
 					IdentificaLibro(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
@@ -390,7 +411,7 @@ int main (int argc, char *argv[]){
 					BuscarPorAutor(libro);
 					break;
 				case 6:
-					PedirLibro(libro, total_libros);
+					PedirLibro(&libro, &total_libros);
 				default:
 					("\n");
 				break;
@@ -398,7 +419,7 @@ int main (int argc, char *argv[]){
 	}
 	}else if (argc == 2) {
 		if (strcmp(argv[1], "Mostrar") == 0) {
-        MostrarLibros(libro);
+        MostrarLibros(libro, total_libros);
     }
 	}else if(argc == 3){ 
     	if(strcmp(argv[1], "IdentificarLibro") == 0) {
@@ -437,7 +458,7 @@ int main (int argc, char *argv[]){
     }else{
         printf("Función no reconocida: %s\n", argv[1]);
         return 1;
-}
+	}
 }
 
 	free(libro);
@@ -445,5 +466,6 @@ int main (int argc, char *argv[]){
 	return EXIT_SUCCESS;
 
 }
+
 
 
