@@ -1,0 +1,31 @@
+#cajaPadre{
+    background-color: blanchedalmond;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    flex-basis: ;
+}
+
+.cajaBlock{
+    background-color: aquamarine;
+    display: block;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+}
+
+.cajaInline{
+    background-color: blueviolet;
+    display: inline;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+}
+
+.cajaInline_Block{
+    background-color: rgb(196, 233, 33);
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+}

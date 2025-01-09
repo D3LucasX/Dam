@@ -1,0 +1,152 @@
+#cajaPadre{
+    background-color: blanchedalmond;
+    width: 900px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.cajaMorada{
+    background-color: blueviolet;
+    border: 2px solid black;
+
+    grid-column: 1/4;
+    grid-row: 1/2;
+}
+
+.cajaAzul{
+    background-color: blue;
+    border: 2px solid black;
+
+    grid-column: 2/3;
+    grid-row: 1/4;
+}
+
+.cajaRoja{
+    background-color: red;
+    border: 2px solid black;
+
+    grid-column: 1/2;
+    grid-row: 2/4;
+}
+
+.cajaVerde{
+    background-color: green;
+    border: 2px solid black;
+
+    grid-column: 3/4;
+    grid-row: 2/4;
+}
+
+
+#cajaPadre2{
+    background-color: blanchedalmond;
+    width: 900px;
+    height: 500px;
+    position: relative;
+}
+
+.cajaNaranja{
+    background-color: orange;
+    width: 55vw;
+    height: 40vh;
+    top: 40vh;
+    right: 30vw;
+    position: absolute;
+}
+.desplegable, select{
+    display: inline-block;  /* Hace que tanto el <p> como el <select> estén en la misma línea */
+    vertical-align: middle; /* Alinea los elementos verticalmente en el centro */
+}
+
+select {
+    margin-left: 10px; /* Espacio entre el texto y el desplegable */
+}
+
+
+.cajaAmarilla{
+    background-color: yellow;
+    width: 70vw;
+    height: 30vh;
+    top: 90vh;
+    left: 40vw;
+    position: absolute;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+.cajaTurquesa{
+    background-color: aquamarine;
+    width: 50vw;
+    height: 50vh;
+    top: 20vh;
+    left: 30vw;
+    position: absolute;
+}
+table{
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+tr, th, td{
+    border: 1px solid black
+}
+
+.tabla{
+    display: flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cajagris{
+    background-color: rgb(90, 87, 87);
+    width: 70vw;
+    height: 30vh;
+    bottom: 100%;
+    right: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.titulo{
+    font: bold;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 25%;         /* 50% desde la parte superior del contenedor */
+    left: 50%;        /* 50% desde el borde izquierdo del contenedor */
+    transform: translate(-50%, -50%); /* Mueve el h1 hacia el centro exacto */
+}
+
+.pGrid{
+    font-family:sans-serif;
+    color: beige;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.pFlex{
+    font-family:sans-serif;
+    color: beige;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.cajaNegra{
+    background-color: black;
+    width: 200px;
+    height: 80px;
+
+}
