@@ -1,0 +1,33 @@
+body{
+    background-color: red;
+    margin: 10px 10px 20px 20px;
+}
+#cajaPadre{
+    background-color: red;
+}
+
+#cajaVerde{
+    background-color: green;
+    float: left;
+    width: 50vw;
+    height: 50vh;
+    padding: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#cajaMorada{
+    background-color: purple;
+    float: left;
+    width: 30vw;
+    height: 50vh;
+    padding: 20px;
+}
+
+#cajaAmarilla{
+    background-color: yellow;
+    clear: both;
+    height: 50vh;
+    width: 88vw;
+    padding: 20px;
+}

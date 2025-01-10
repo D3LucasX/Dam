@@ -1,0 +1,85 @@
+*{
+    margin:0px;
+}
+body{
+    font-family: 'Gill Sans', sans-serif;
+   
+}
+h1{
+    font-family: Georgia, serif;
+    color: green;
+}
+
+#CajaRosa{
+    background-color: pink;
+    position: absolute;
+    width: 30vw;
+    height: 20vh;
+    left: 25%;
+}
+
+#CajaAmarilla{
+    background-color: yellow;
+    padding-top: 10px;
+    position: absolute;
+    right: 2%;
+}
+
+#CajaCyan{
+    background-color: cyan;
+    height: 50vh;
+}
+
+#CajaNaranja{
+    background-color: orange;
+    float: right;
+    width: 50%;
+}
+table{
+    border: 1px solid green;
+    border-collapse: collapse;
+}
+tr, th, td{
+    border: 1px solid green;
+   text-align: right;
+    width: 5px;
+}
+
+#Cajaroja{
+    background-color: red;
+    width: 50%;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: first baseline;
+}
+
+.CyanClaro{
+    background-color: rgb(159, 217, 217);
+    width: 20%;
+    height: 30%;
+    gap: 0%;
+}
+
+#CajaGreenYellow{
+    background-color: greenyellow;
+    width: 50%;
+    height: 30vh;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.CajaBlanca{
+    background-color: white;
+}
+.CajaBlanca2{
+    background-color: white;
+    grid-row: 2/3;
+}
+.CajaViolet{
+    background-color: violet;
+    grid-row: 1/3;
+}

@@ -13,7 +13,7 @@ int main (){
 	printf("Ingresa un número.\n");
 	scanf("%d", &n);
 
-	char ** arr = (char **) malloc( n * sizeof(char)); 
+	char ** arr = (char **) malloc( n * sizeof(char*)); 
 	// Lo que necesitamos para este ejemplo, es que 
 	// un puntero a una cadena de caracteres, entonces lo que 
 	// creamos con esto, son 3 direcciones de memoria que

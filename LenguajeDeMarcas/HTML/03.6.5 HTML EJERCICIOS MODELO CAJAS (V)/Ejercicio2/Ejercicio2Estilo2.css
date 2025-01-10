@@ -1,0 +1,35 @@
+
+#cajaPadre{
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;  /*Con flex flow podemos poner los dos valores en una sola, 
+                        podriamos poner flex-flow: row wrap  y haria lo mismo*/
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+                    }
+
+#cajaVerde{
+    background-color: green;
+    height: 50vh;
+    width: 60%;
+    border: 10px;
+}
+
+#cajaMorada{
+    background-color: purple;
+    height: 50vh;
+    width: 38.6%;
+    border:10px ;
+    margin-left: 10px;
+}
+
+#cajaAmarilla{
+    background-color: yellow;
+    height: 50vh;
+    width: 100%;
+    margin-top: 10px;
+    /*Con la etiqueta flex-basis: 100vw haria lo mismo que el width*/   
+}
