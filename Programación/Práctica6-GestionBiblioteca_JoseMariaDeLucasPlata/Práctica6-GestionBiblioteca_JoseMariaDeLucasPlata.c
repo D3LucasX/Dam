@@ -64,10 +64,10 @@ void MostrarLibro(const Libro * libro_a_imprimir){ //Funcion que te imprime un l
 		
 	}
 
-void MostrarLibros(const Libro * libro_a_imprimir, int total_libros){ //Función que te imprime todo el catálogo de libros, pasando como parámetro un puntero al primer libro, de esta manera, entra un bucle for 
+void MostrarLibros(const Libro * libro_a_imprimir, int *total_libros){ //Función que te imprime todo el catálogo de libros, pasando como parámetro un puntero al primer libro, de esta manera, entra un bucle for 
 													//que recorre todo el catálogo de libros, y llamamos a la función de Mostrar un libro, con el argumento de la dirección de memoria 
 													// de donde se encuentra el libro en la posición i, que sería la posición 0, asi va recorriendo e imprimiendo cada libro.
-	for(int i = 0; i < total_libros; i++){
+	for(int i = 0; i < *total_libros; i++){
 		printf("Libro numero %d.\n", i + 1);
 		MostrarLibro(&libro_a_imprimir[i]);
 	}
@@ -256,7 +256,7 @@ void BuscarPorAutor(const Libro * FiltroPorAutor){
 	FiltrarPorAutor(FiltroPorAutor, autor_a_buscar);
 }
 
-void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float precio, int categoria, int cantidad, int total_libros){
+void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float precio, int categoria, int cantidad, int* total_libros){
 	direccion -> id= id;
 	strcpy(direccion -> titulo, titulo);
 	strcpy(direccion -> autor, autor);
@@ -264,19 +264,23 @@ void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float
 	direccion -> categoria = categoria;
 	direccion -> cantidad = cantidad;
 
-	total_libros ++;
+	(*total_libros)++;
+	/*No aumentaba la variable ya que lo que sucedia cuando tenía puesto esto: *total_libros++, es que primero aumentaba en 1, la direccion de memoria de 
+	total_libros, y luego accedia a su contenido, por eso no aumentaba su contenido, si no que aumentaba la dirección de memoria, para arreglarlo le das prioridad
+	a acceder al contenido de total_libros, y luego lo aumentas en uno de esta manera: (*total_libros)++; */
 }
 
 Libro PedirLibro(Libro* catalogo, int * total_libros){
 	Libro Libro_Nuevo;
 
-	Libro* temp = (Libro*) realloc (*catalogo ,(*(total_libros) + 1) * sizeof(Libro));
+	Libro* temp = (Libro*) realloc (catalogo ,(*(total_libros) + 1) * sizeof(Libro));
+
 	if (temp == NULL) {
         printf("Error al reasignar memoria\n");
-        return; // Salir si realloc falla
+        return *catalogo; // Salir si realloc falla
     }
      // Si realloc fue exitoso, actualizamos catalogo
-    *catalogo = temp;
+    catalogo = temp;
 
 	Libro_Nuevo.id = (*total_libros) + 1;
 
@@ -299,10 +303,10 @@ Libro PedirLibro(Libro* catalogo, int * total_libros){
 	scanf("%d", &Libro_Nuevo.cantidad);
 	getchar();
 
-	inicializarLibro(&(*catalogo)[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, (*(total_libros)));
+	inicializarLibro(&catalogo[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
 
 
-	printf("Nuevo libro añadido: %s por %s\n", (*catalogo)[*total_libros - 1].titulo, (*catalogo)[*total_libros - 1].autor);
+	printf("Nuevo libro añadido: %s por %s\n", catalogo[*total_libros - 1].titulo, catalogo[*total_libros - 1].autor);
 	return Libro_Nuevo;
 }
 
@@ -330,46 +334,46 @@ int main (int argc, char *argv[]){
     }
 
     /*INICIALIZAMOS LIBRO*/
-    inicializarLibro(&libro[0], 1, "To Kill a Mockingbird", "Harper Lee", 15.99, FICCIÓN, 10, total_libros);
-    inicializarLibro(&libro[1], 2, "1984", "George Orwell", 12.49, FICCIÓN, 5, total_libros);
-    inicializarLibro(&libro[2], 3, "The Great Gatsby", "F. Scott Fitzgerald", 10.99, FICCIÓN, 8, total_libros);
-    inicializarLibro(&libro[3], 4, "Moby Dick", "Herman Melville", 18.99, FICCIÓN, 12, total_libros);
-    inicializarLibro(&libro[4], 5, "War and Peace", "Leo Tolstoy", 20.00, FICCIÓN, 7, total_libros);
-    inicializarLibro(&libro[5], 6, "Pride and Prejudice", "Jane Austen", 14.99, FICCIÓN, 9, total_libros);
-    inicializarLibro(&libro[6], 7, "The Catcher in the Rye", "J.D. Salinger", 10.00, FICCIÓN, 6, total_libros);
-    inicializarLibro(&libro[7], 8, "The Odyssey", "Homer", 17.49, FICCIÓN, 4, total_libros);
-    inicializarLibro(&libro[8], 9, "Ulysses", "James Joyce", 25.00, FICCIÓN, 2, total_libros);
-    inicializarLibro(&libro[9], 10, "The Divine Comedy", "Dante Alighieri", 22.00, POESÍA, 3, total_libros);
-    inicializarLibro(&libro[10], 11, "Leaves of Grass", "Walt Whitman", 13.00, POESÍA, 11, total_libros);
-    inicializarLibro(&libro[11], 12, "The Iliad", "Homer", 18.50, FICCIÓN, 7, total_libros);
-    inicializarLibro(&libro[12], 13, "A Brief History of Time", "Stephen Hawking", 15.00, NO_FICCIÓN, 15, total_libros);
-    inicializarLibro(&libro[13], 14, "The Art of War", "Sun Tzu", 9.99, NO_FICCIÓN, 20, total_libros);
-    inicializarLibro(&libro[14], 15, "Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 16.49, NO_FICCIÓN, 13, total_libros);
-    inicializarLibro(&libro[15], 16, "The Selfish Gene", "Richard Dawkins", 14.00, NO_FICCIÓN, 6, total_libros);
-    inicializarLibro(&libro[16], 17, "The Road to Serfdom", "F.A. Hayek", 10.50, NO_FICCIÓN, 5, total_libros);
-    inicializarLibro(&libro[17], 18, "The Wealth of Nations", "Adam Smith", 30.00, NO_FICCIÓN, 8, total_libros);
-    inicializarLibro(&libro[18], 19, "On the Origin of Species", "Charles Darwin", 24.99, NO_FICCIÓN, 4, total_libros);
-    inicializarLibro(&libro[19], 20, "The Prince", "Niccolò Machiavelli", 8.99, NO_FICCIÓN, 14, total_libros);
-    inicializarLibro(&libro[20], 21, "Hamlet", "William Shakespeare", 11.50, TEATRO, 6, total_libros);
-    inicializarLibro(&libro[21], 22, "Macbeth", "William Shakespeare", 9.50, TEATRO, 8, total_libros);
-    inicializarLibro(&libro[22], 23, "Othello", "William Shakespeare", 10.99, TEATRO, 7, total_libros);
-    inicializarLibro(&libro[23], 24, "A Doll's House", "Henrik Ibsen", 12.50, TEATRO, 5, total_libros);
-    inicializarLibro(&libro[24], 25, "Waiting for Godot", "Samuel Beckett", 13.99, TEATRO, 4, total_libros);
-    inicializarLibro(&libro[25], 26, "Death of a Salesman", "Arthur Miller", 14.99, TEATRO, 10, total_libros);
-    inicializarLibro(&libro[26], 27, "The Glass Menagerie", "Tennessee Williams", 11.00, TEATRO, 9, total_libros);
-    inicializarLibro(&libro[27], 28, "Long Day's Journey into Night", "Eugene O'Neill", 19.50, TEATRO, 3, total_libros);
-    inicializarLibro(&libro[28], 29, "The Importance of Being Earnest", "Oscar Wilde", 8.50, TEATRO, 15, total_libros);
-    inicializarLibro(&libro[29], 30, "The Waste Land", "T.S. Eliot", 6.99, POESÍA, 10, total_libros);
-    inicializarLibro(&libro[30], 31, "Paradise Lost", "John Milton", 12.00, POESÍA, 7, total_libros);
-    inicializarLibro(&libro[31], 32, "Beowulf", "Anonymous", 15.00, POESÍA, 5, total_libros);
-    inicializarLibro(&libro[32], 33, "Essays", "Michel de Montaigne", 20.00, ENSAYO, 4, total_libros);
-    inicializarLibro(&libro[33], 34, "Self-Reliance and Other Essays", "Ralph Waldo Emerson", 9.00, ENSAYO, 9, total_libros);
-    inicializarLibro(&libro[34], 35, "Civil Disobedience and Other Essays", "Henry David Thoreau", 7.50, ENSAYO, 11, total_libros);
-    inicializarLibro(&libro[35], 36, "Meditations", "Marcus Aurelius", 11.99, ENSAYO, 8, total_libros);
-    inicializarLibro(&libro[36], 37, "The Federalist Papers", "Alexander Hamilton, James Madison, John Jay", 18.00, ENSAYO, 5, total_libros);
-    inicializarLibro(&libro[37], 38, "The Communist Manifesto", "Karl Marx and Friedrich Engels", 5.99, ENSAYO, 12, total_libros);
-    inicializarLibro(&libro[38], 39, "The Republic", "Plato", 16.00, ENSAYO, 6, total_libros);
-    inicializarLibro(&libro[39], 40, "Thus Spoke Zarathustra", "Friedrich Nietzsche", 14.99, ENSAYO, 10, total_libros);
+    inicializarLibro(&libro[0], 1, "To Kill a Mockingbird", "Harper Lee", 15.99, FICCIÓN, 10, &total_libros);
+    inicializarLibro(&libro[1], 2, "1984", "George Orwell", 12.49, FICCIÓN, 5, &total_libros);
+    inicializarLibro(&libro[2], 3, "The Great Gatsby", "F. Scott Fitzgerald", 10.99, FICCIÓN, 8, &total_libros);
+    inicializarLibro(&libro[3], 4, "Moby Dick", "Herman Melville", 18.99, FICCIÓN, 12, &total_libros);
+    inicializarLibro(&libro[4], 5, "War and Peace", "Leo Tolstoy", 20.00, FICCIÓN, 7, &total_libros);
+    inicializarLibro(&libro[5], 6, "Pride and Prejudice", "Jane Austen", 14.99, FICCIÓN, 9, &total_libros);
+    inicializarLibro(&libro[6], 7, "The Catcher in the Rye", "J.D. Salinger", 10.00, FICCIÓN, 6, &total_libros);
+    inicializarLibro(&libro[7], 8, "The Odyssey", "Homer", 17.49, FICCIÓN, 4, &total_libros);
+    inicializarLibro(&libro[8], 9, "Ulysses", "James Joyce", 25.00, FICCIÓN, 2, &total_libros);
+    inicializarLibro(&libro[9], 10, "The Divine Comedy", "Dante Alighieri", 22.00, POESÍA, 3, &total_libros);
+    inicializarLibro(&libro[10], 11, "Leaves of Grass", "Walt Whitman", 13.00, POESÍA, 11, &total_libros);
+    inicializarLibro(&libro[11], 12, "The Iliad", "Homer", 18.50, FICCIÓN, 7, &total_libros);
+    inicializarLibro(&libro[12], 13, "A Brief History of Time", "Stephen Hawking", 15.00, NO_FICCIÓN, 15, &total_libros);
+    inicializarLibro(&libro[13], 14, "The Art of War", "Sun Tzu", 9.99, NO_FICCIÓN, 20, &total_libros);
+    inicializarLibro(&libro[14], 15, "Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 16.49, NO_FICCIÓN, 13, &total_libros);
+    inicializarLibro(&libro[15], 16, "The Selfish Gene", "Richard Dawkins", 14.00, NO_FICCIÓN, 6, &total_libros);
+    inicializarLibro(&libro[16], 17, "The Road to Serfdom", "F.A. Hayek", 10.50, NO_FICCIÓN, 5, &total_libros);
+    inicializarLibro(&libro[17], 18, "The Wealth of Nations", "Adam Smith", 30.00, NO_FICCIÓN, 8, &total_libros);
+    inicializarLibro(&libro[18], 19, "On the Origin of Species", "Charles Darwin", 24.99, NO_FICCIÓN, 4, &total_libros);
+    inicializarLibro(&libro[19], 20, "The Prince", "Niccolò Machiavelli", 8.99, NO_FICCIÓN, 14, &total_libros);
+    inicializarLibro(&libro[20], 21, "Hamlet", "William Shakespeare", 11.50, TEATRO, 6, &total_libros);
+    inicializarLibro(&libro[21], 22, "Macbeth", "William Shakespeare", 9.50, TEATRO, 8, &total_libros);
+    inicializarLibro(&libro[22], 23, "Othello", "William Shakespeare", 10.99, TEATRO, 7, &total_libros);
+    inicializarLibro(&libro[23], 24, "A Doll's House", "Henrik Ibsen", 12.50, TEATRO, 5, &total_libros);
+    inicializarLibro(&libro[24], 25, "Waiting for Godot", "Samuel Beckett", 13.99, TEATRO, 4, &total_libros);
+    inicializarLibro(&libro[25], 26, "Death of a Salesman", "Arthur Miller", 14.99, TEATRO, 10, &total_libros);
+    inicializarLibro(&libro[26], 27, "The Glass Menagerie", "Tennessee Williams", 11.00, TEATRO, 9, &total_libros);
+    inicializarLibro(&libro[27], 28, "Long Day's Journey into Night", "Eugene O'Neill", 19.50, TEATRO, 3, &total_libros);
+    inicializarLibro(&libro[28], 29, "The Importance of Being Earnest", "Oscar Wilde", 8.50, TEATRO, 15, &total_libros);
+    inicializarLibro(&libro[29], 30, "The Waste Land", "T.S. Eliot", 6.99, POESÍA, 10, &total_libros);
+    inicializarLibro(&libro[30], 31, "Paradise Lost", "John Milton", 12.00, POESÍA, 7, &total_libros);
+    inicializarLibro(&libro[31], 32, "Beowulf", "Anonymous", 15.00, POESÍA, 5, &total_libros);
+    inicializarLibro(&libro[32], 33, "Essays", "Michel de Montaigne", 20.00, ENSAYO, 4, &total_libros);
+    inicializarLibro(&libro[33], 34, "Self-Reliance and Other Essays", "Ralph Waldo Emerson", 9.00, ENSAYO, 9, &total_libros);
+    inicializarLibro(&libro[34], 35, "Civil Disobedience and Other Essays", "Henry David Thoreau", 7.50, ENSAYO, 11, &total_libros);
+    inicializarLibro(&libro[35], 36, "Meditations", "Marcus Aurelius", 11.99, ENSAYO, 8, &total_libros);
+    inicializarLibro(&libro[36], 37, "The Federalist Papers", "Alexander Hamilton, James Madison, John Jay", 18.00, ENSAYO, 5, &total_libros);
+    inicializarLibro(&libro[37], 38, "The Communist Manifesto", "Karl Marx and Friedrich Engels", 5.99, ENSAYO, 12, &total_libros);
+    inicializarLibro(&libro[38], 39, "The Republic", "Plato", 16.00, ENSAYO, 6, &total_libros);
+    inicializarLibro(&libro[39], 40, "Thus Spoke Zarathustra", "Friedrich Nietzsche", 14.99, ENSAYO, 10, &total_libros);
 
 
 	/* argv son las DIRECCIONES DE MEMORIA que se asocian a cada argumento */
@@ -396,7 +400,7 @@ int main (int argc, char *argv[]){
 			}
 				switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
 				case 1:
-					MostrarLibros(libro, total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					MostrarLibros(libro, &total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
 					break;
 				case 2:
 					IdentificaLibro(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
@@ -411,7 +415,7 @@ int main (int argc, char *argv[]){
 					BuscarPorAutor(libro);
 					break;
 				case 6:
-					PedirLibro(&libro, &total_libros);
+					PedirLibro(libro, &total_libros);
 				default:
 					("\n");
 				break;
@@ -419,7 +423,7 @@ int main (int argc, char *argv[]){
 	}
 	}else if (argc == 2) {
 		if (strcmp(argv[1], "Mostrar") == 0) {
-        MostrarLibros(libro, total_libros);
+        MostrarLibros(libro, &total_libros);
     }
 	}else if(argc == 3){ 
     	if(strcmp(argv[1], "IdentificarLibro") == 0) {
