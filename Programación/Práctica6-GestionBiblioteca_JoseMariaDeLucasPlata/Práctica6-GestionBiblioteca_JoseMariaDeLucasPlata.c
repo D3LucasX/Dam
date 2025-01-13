@@ -74,9 +74,9 @@ void MostrarLibros(const Libro * libro_a_imprimir, int *total_libros){ //Funció
 }
 
 
-void IdentificaLibroPorId(const Libro * Catalogo,int id_a_buscar){
+void IdentificaLibroPorId(const Libro * Catalogo,int id_a_buscar, int *total_libros){
 	// TODO: completar
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < *total_libros; i++) {
             if (id_a_buscar == Catalogo[i].id) {
                 MostrarLibro(&Catalogo[i]);
                 break;
@@ -85,7 +85,7 @@ void IdentificaLibroPorId(const Libro * Catalogo,int id_a_buscar){
 }
 
 
-void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro por el ID.
+void IdentificaLibro(const Libro * Catalogo, int *total_libros) { // Función que busca un libro por el ID.
 											   // Creamos una función pasando como parámetro un puntero a la primera posicion delstruct. en la que guardamos en una variable el numero del id que introduzca el usuario y 
 											   // dentro de un ciclo Do While mediante un bucle for, recorremos 
 											   // el array compàrando si el id del catalogo(num entero) es igual al id que introduzca el usuario (numero entero),
@@ -97,26 +97,20 @@ void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro po
     
     do { 
         // Primer ciclo para validar que el ID sea válido
-        while (buscar < 0 || buscar > 40) { 
+        while (buscar < 0 || buscar > *total_libros) { 
         	//Lo dejamos dentro del do, para que en el while del Do-While sea el que nos indique si se repite todo otra vez.
             printf("¿Que libro desea buscar?\n");
             printf("\tIntroduzca el ID del libro: \n");
             scanf("%d", &buscar);
 
-            if (buscar < 0 || buscar > 40) {
+            if (buscar < 0 || buscar > *total_libros) {
                 printf("Introduce un valor válido.\n");
             }
         }
 
         // Buscar y mostrar el libro
-		IdentificaLibroPorId(Catalogo,buscar);
-        /*int found = 0; // Indicador para saber si encontramos el libro
-        for (int i = 0; i < 40; i++) {
-            if (buscar == Catalogo[i].id) {
-                MostrarLibro(&Catalogo[i]);
-                break;
-            }
-        }*/
+		IdentificaLibroPorId(Catalogo,buscar, total_libros);
+        
         // Segundo ciclo para preguntar si desea buscar otro libro
         printf("¿Desea buscar otro libro? (marque 1 si es que sí, marque cualquier otra cosa si es que no)\n");
         scanf("%d", &SiNo);
@@ -133,8 +127,8 @@ void IdentificaLibro(const Libro * Catalogo) { // Función que busca un libro po
 	
 
 
-void IncrementarLDC(Libro * Libro_a_Incrementar, int id, int incremento){
-	for (int i = 0; i < 40; i++){
+void IncrementarLDC(Libro * Libro_a_Incrementar, int id, int incremento, int *total_libros){
+	for (int i = 0; i < *total_libros; i++){
 		if(Libro_a_Incrementar[i].id == id){  // No hace falta poner la flecha porque ya estamos accediendo a la direccion de memoria con los corchetes.
 			//(Libro_a_Incrementar+i)->id <--> Libro_a_Incrementar[i].id
 			//(*(Libro_a_Incrementar+i)).id <--> Libro_a_Incrementar[i].id
@@ -145,7 +139,7 @@ void IncrementarLDC(Libro * Libro_a_Incrementar, int id, int incremento){
 	}
 }
 }
-void IncrementarStock(Libro * Libro_a_Incrementar){ // Función que incrementa el stock de el libro que busques.
+void IncrementarStock(Libro * Libro_a_Incrementar, int *total_libros){ // Función que incrementa el stock de el libro que busques.
 													// Creamos una función que pasando como parámetro un puntero a la primera posición de un struct. En la función creamos dos variables en las que 
 													// guardaremos el incremento y otra en la que guardaremos el numero que nos de el usuario para buscar el libro por el id.
 													// Haremos un bucle for en el que recorreremos el catálogo y cuando encuentre el libro que queremos, le sumara el incremento.
@@ -167,10 +161,10 @@ void IncrementarStock(Libro * Libro_a_Incrementar){ // Función que incrementa e
 			break;
 	}
 }*/
-	IncrementarLDC(Libro_a_Incrementar, buscar, incremento);
+	IncrementarLDC(Libro_a_Incrementar, buscar, incremento, total_libros);
 }
-void FiltraPorCategoria(const Libro * Catalogo, int categoria){
-		for (int i = 0; i < 40; i++){
+void FiltraPorCategoria(const Libro * Catalogo, int categoria, int *total_libros){
+		for (int i = 0; i < *total_libros; i++){
 		if(categoria == Catalogo[i].categoria){
 			MostrarLibro(&Catalogo[i]); // Accedemos a la direccion de memoria del catalogo en la posicion i
 		}else{
@@ -179,7 +173,7 @@ void FiltraPorCategoria(const Libro * Catalogo, int categoria){
 	}
 }
 
-void BuscarPorCategoria(const Libro * CatalogoCategoria){  // Funcion que te filtra los libros por categoria y te los imprime.
+void BuscarPorCategoria(const Libro * CatalogoCategoria, int *total_libros){  // Funcion que te filtra los libros por categoria y te los imprime.
 														   // Creamos una función en la que pasamos como parametro el puntero al primer libro del catálogo, te da la opcion de elegir 
 														   // la categoría y te da la opcion de salir que la implementamos con una condicion if, mediante un bucle for, recorremos todos
 														   // los libros, y comparamos la categoria introducida (número entero) con la categoría de ese libro (número entero), y en caso de ser iguales
@@ -203,10 +197,10 @@ void BuscarPorCategoria(const Libro * CatalogoCategoria){  // Funcion que te fil
 	if (buscar > 4){
 		return;
 	}
-	FiltraPorCategoria(CatalogoCategoria, buscar);
+	FiltraPorCategoria(CatalogoCategoria, buscar, total_libros);
 }
-void FiltrarPorAutor(const Libro * Catalogo, char autor_a_buscar[100]){
-	for(int i = 0; i < 40; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
+void FiltrarPorAutor(const Libro * Catalogo, char autor_a_buscar[100], int *total_libros){
+	for(int i = 0; i < *total_libros; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
 		for(int j = 0; Catalogo[i].autor[j] != '\0'; j++){ //De esta manera cuando llegue al \0 dejara de aumentar.
 
 	if (strncmp(&Catalogo[i].autor[j], autor_a_buscar, strlen(autor_a_buscar)) == 0){ //comparamos con 0 para que ejecute el bloque si son iguales las cadenas de caracteres.
@@ -228,39 +222,23 @@ void FiltrarPorAutor(const Libro * Catalogo, char autor_a_buscar[100]){
 }
 }
 }
-void BuscarPorAutor(const Libro * FiltroPorAutor){
-	char autor_a_buscar[100]; // creamos una variable para almacenar el nombre que de el usuario.
+void BuscarPorAutor(const Libro * FiltroPorAutor, int *total_libros){
+	char autor_a_buscar[100]; // Creamos una variable para almacenar el nombre que de el usuario.
 	printf("Escribe el nombre del autor.\n");
-	scanf(" %[^\n]", autor_a_buscar); // COn ese scanf almacenamos lo que el usuario introduzca sin contar espacios usando %[^\n]
-	/*r(int i = 0; i < 40; i++){  // Creamos dos bucles, uno para recorrer cada libro y otro para recorrer cada cadena de caracter del autor que contenga cada libro
-		for(int j = 0; FiltroPorAutor[i].autor[j] != '\0'; j++){ //De esta manera cuando llegue al \0 dejara de aumentar.
+	scanf(" %[^\n]", autor_a_buscar); // Con ese scanf almacenamos lo que el usuario introduzca sin contar espacios usando %[^\n]
 
-	if (strncmp(&FiltroPorAutor[i].autor[j], autor_a_buscar, strlen(autor_a_buscar)) == 0){ //comparamos con 0 para que ejecute el bloque si son iguales las cadenas de caracteres.
-
-		// Con strncmp lo que hacemos es que comparamos las primeras posiciones de dos cadenas de caracteres con X caracteres.
-		// Para ello es necesario pasarle dos punteros apuntando al primer caracter de ambas cadenas a comparar, como FiltroPorAutor[i].autor[j] no es 
-		// un puntero, por que le estamos indicando el caracter en si, con la posicion 'j', hay que añadirle el '&' para que le pases la direccion de 
-		// memoria del primer caracter, si no coincide y FiltroPorAutor[i].autor[j] es distinto de \o, j aumenta, entonces comparara desde la direccion
-		// de memoria de j + 1 y asi hasta que llegue al \0 que entonces saldra de el bucle interno.
-		// Por otro lado autor_a_buscar ya es un puntero al primer caracter de la cadena de caracteres, por eso cuando el usuario lo escribe en
-		// el scanf, no hace falta guardarlo en una variable con el '&'.
-		// Y finalmente tenemos el numero de caracteres que queremos que se comparen, que en este caso sera el numero de caracteres que tenga autor_a_buscar.
-		
-		MostrarLibro(&FiltroPorAutor[i]); //Accedemos a la direccion de memoria del catalogo en la posicion i
-		break; // Si nos encuentra al libro del autor, nos lo imprime y sale del subbucle.
-	}else{
-		continue; //Si no lo encuentra, continua.
-	}
-}
-}*/
-	FiltrarPorAutor(FiltroPorAutor, autor_a_buscar);
+	FiltrarPorAutor(FiltroPorAutor, autor_a_buscar, total_libros);
 }
 
 void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float precio, int categoria, int cantidad, int* total_libros){
-	direccion -> id= id;
+/* Con esta funcion, inicializamos un libro, en la memoria que hemos reservado con malloc en el main*/
+/* En la funcion pasamos un putero de tipo Libro con todos los datos necesarios que tiene que tener nuestro libro*/
+
+
+	direccion -> id = id;
 	strcpy(direccion -> titulo, titulo);
-	strcpy(direccion -> autor, autor);
-	direccion -> precio = precio;
+	strcpy(direccion -> autor, autor);		// UTILIZAMOS LA FLECHA PORQUE 
+	direccion -> precio = precio;			// SE USA CON PUNTEROS A ESTRUCTURAS.
 	direccion -> categoria = categoria;
 	direccion -> cantidad = cantidad;
 
@@ -269,27 +247,68 @@ void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float
 	total_libros, y luego accedia a su contenido, por eso no aumentaba su contenido, si no que aumentaba la dirección de memoria, para arreglarlo le das prioridad
 	a acceder al contenido de total_libros, y luego lo aumentas en uno de esta manera: (*total_libros)++; */
 }
+void AñadirLibroDesdeLineaDeComandos(Libro** catalogo, int* total_libros, const char* titulo, const char* autor, float precio, int categoria, int cantidad) {
+    Libro Libro_Nuevo;
 
-Libro PedirLibro(Libro* catalogo, int * total_libros){
+    // Usar realloc para redimensionar el catálogo
+    Libro* temp = (Libro*) realloc(*catalogo, (*(total_libros) + 1) * sizeof(Libro));
+    if (temp == NULL) {
+        printf("Error al reasignar memoria\n");
+        return; // Salir si realloc falla
+    }
+    *catalogo = temp;
+
+    // Asignar un nuevo ID
+    Libro_Nuevo.id = (*total_libros) + 1;
+
+    // Asignar los detalles del libro recibidos como parámetros
+    strcpy(Libro_Nuevo.titulo, titulo);
+    strcpy(Libro_Nuevo.autor, autor);
+    Libro_Nuevo.precio = precio;
+    Libro_Nuevo.categoria = categoria;
+    Libro_Nuevo.cantidad = cantidad;
+
+    // Inicializar el nuevo libro en el catálogo
+    inicializarLibro(&(*catalogo)[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
+
+    // Imprimir un mensaje de confirmación
+    printf("Nuevo libro añadido: %s por %s\n", (*catalogo)[*total_libros - 1].titulo, (*catalogo)[*total_libros - 1].autor);
+}
+void AñadirLibro(Libro** catalogo, int * total_libros){
+/* En esta función, se añade un libro nuevo*/
+/* Se pasa como parametros un puntero a puntero que appunta a la dirección de memoria del arreglo libros.
+Esto es necesario ya que al usar realloc, puede devolver una nueva direccion de memoria,por lo que debemos
+de actualizar el puntero catalogo para que apunte a la nueva direccion del catalogo*/
+/*¿QUE ME PASABA ANTES?
+		- Al no pasar la direccion de memoria modificada, al imprimir todos los libros, los datos del nuevo
+		  libro se perdian, ya que no sabia el main donde se habia guardado. Todo esto por que se ejecutaba
+		  en la función pero no en el main(lo que hacemos es pasar la dirección de memoria por referencia.)*/	
+/*También pasamos como parametro un puntero a la variable total_libros, para pasar su valor por referencia*/
+
 	Libro Libro_Nuevo;
 
-	Libro* temp = (Libro*) realloc (catalogo ,(*(total_libros) + 1) * sizeof(Libro));
-
+	Libro* temp = (Libro*) realloc (*catalogo ,(*(total_libros) + 1) * sizeof(Libro));
+/* *catalogo se usa para acceder al puntero original que apunta al arreglo de libros y pasarlo a realloc para 
+redimensionarlo.*/
 	if (temp == NULL) {
         printf("Error al reasignar memoria\n");
-        return *catalogo; // Salir si realloc falla
+        return; // Salir si realloc falla
     }
-     // Si realloc fue exitoso, actualizamos catalogo
-    catalogo = temp;
+
+    *catalogo = temp;
+    // Si realloc fue exitoso, actualizamos la direccion de memoria, siendo temp la que guarda la nueva direccion de memoria
+    // entonces la guardamos en catalogo para asi actualizarlo.
 
 	Libro_Nuevo.id = (*total_libros) + 1;
 
 
 	printf("¿Cuál es el titulo del nuevo libro?\n");
 	scanf(" %[^\n]", Libro_Nuevo.titulo);
+	getchar();
 
 	printf(" Escribe el nombre del autor.\n");
 	scanf(" %[^\n]", Libro_Nuevo.autor);
+	getchar();
 
 	printf("Introduzca el precio:\n");
 	scanf("%f", &Libro_Nuevo.precio);
@@ -302,16 +321,16 @@ Libro PedirLibro(Libro* catalogo, int * total_libros){
 	printf("¿Cual es el stock total del libro?\n");
 	scanf("%d", &Libro_Nuevo.cantidad);
 	getchar();
+	// Pedimos los datos del nuevo libro.
 
-	inicializarLibro(&catalogo[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
+	inicializarLibro(&(*catalogo)[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
+/* Aqui lo que hacemos es acceder a la direccion de memoria del puntero que apunta al siguiente libro a agregar*/
 
-
-	printf("Nuevo libro añadido: %s por %s\n", catalogo[*total_libros - 1].titulo, catalogo[*total_libros - 1].autor);
-	return Libro_Nuevo;
+	printf("Nuevo libro añadido: %s por %s\n", catalogo[*total_libros - 1]->titulo, catalogo[*total_libros - 1]->autor);
 }
 
 
-
+ 
 int main (int argc, char *argv[]){
 	int i = 0, opcion;
 
@@ -321,9 +340,11 @@ int main (int argc, char *argv[]){
 	
 
 	if (argc < 2) {
-        printf("Uso: %s <mostrar>\n", argv[0]);
-        printf("Uso: %s <mostrar>\n", argv[0]);
-        printf("Uso: %s <mostrar>\n", argv[0]);
+        printf("Uso: %s <Mostrar>\n", argv[0]);
+        printf("Uso: %s <IdentificarLibro>\n", argv[0]);
+        printf("Uso: %s <Categoria>\n", argv[0]);
+        printf("Uso: %s <Autor>\n", argv[0]);
+        printf("Uso: %s <Stock>\n", argv[0]);
         //return EXIT_FAILURE;
     }
     Libro * libro = (Libro*) malloc(40 * sizeof(Libro));
@@ -377,7 +398,7 @@ int main (int argc, char *argv[]){
 
 
 	/* argv son las DIRECCIONES DE MEMORIA que se asocian a cada argumento */
-	/* argc son l a cantidad de elementos que quieres pedir */
+	/* argc son la cantidad de elementos que quieres pedir */
 	if (argc < 0){
 		printf("Debe proporcionar el nombre de la función como argumento.\n");
         return 1;
@@ -385,7 +406,7 @@ int main (int argc, char *argv[]){
 		printf("***********************************************************\n");
 		printf("*Bienvenido a la Biblioteca Nacional de los Iulian Drakars* \n");
 		printf("***********************************************************\n");
-		while(opcion != 5){
+		while(opcion != 6){
 		printf("Introduzca la opción de la acción que desee realizar:\n\
 				1. Mostrar todo el catálogo de libros.\n\
 				2. Buscar un libro por ID.\n\
@@ -403,19 +424,19 @@ int main (int argc, char *argv[]){
 					MostrarLibros(libro, &total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
 					break;
 				case 2:
-					IdentificaLibro(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					IdentificaLibro(libro, &total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
 					break; 
 				case 3:
-					IncrementarStock(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					IncrementarStock(libro, &total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
 					break;
 				case 4:
-					BuscarPorCategoria(libro); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
+					BuscarPorCategoria(libro, &total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
 					break;
 				case 5:
-					BuscarPorAutor(libro);
+					BuscarPorAutor(libro, &total_libros); // Llamamos a la función de Buscar libro por autor.
 					break;
 				case 6:
-					PedirLibro(libro, &total_libros);
+					AñadirLibro(&libro, &total_libros); // Llamamos a la funcion de añadir un nuevo libro.
 				default:
 					("\n");
 				break;
@@ -429,12 +450,12 @@ int main (int argc, char *argv[]){
     	if(strcmp(argv[1], "IdentificarLibro") == 0) {
 			int id_a_buscar = atoi (argv[2]);
 			/*Nueva funcion*/
-			IdentificaLibroPorId(libro, id_a_buscar);
+			IdentificaLibroPorId(libro, id_a_buscar, &total_libros);
 			return 1;
-		}else if(strcmp(argv[1], "categoria") == 0){
+		}else if(strcmp(argv[1], "Categoria") == 0){
 			int categoria = atoi (argv[2]);
-			FiltraPorCategoria(libro, categoria);
-		}else if(strcmp(argv[1], "autor") == 0){
+			FiltraPorCategoria(libro, categoria, &total_libros);
+		}else if(strcmp(argv[1], "Autor") == 0){
 
 			//Otra manera de hacerlo.
 			/*char  autor_a_buscar[100];
@@ -447,7 +468,7 @@ int main (int argc, char *argv[]){
 			y argv[2], reserva en memoria dinámica, no esta en el mismo sitio, y eso a C
 			no le gusta, por eso no podemos hacer char autor_a_buscar = argv[2]; */
 			// Controlar algún error.
-			FiltrarPorAutor(libro, autor_a_buscar);
+			FiltrarPorAutor(libro, autor_a_buscar, &total_libros);
 			//Otra manera de hacerlo, pero no es la mas recomendable, ya que puede llevar a errores.
 			/*FiltrarPorAutor(libro, argv[2]);*/
 		}else{
@@ -455,15 +476,30 @@ int main (int argc, char *argv[]){
 		}
 
 	}else if (argc == 4){
-		if(strcmp(argv[1], "stock") == 0) {
+		if(strcmp(argv[1], "Stock") == 0) {
 			int id_a_buscar = atoi (argv[2]);
 			int cantidad_a_incrementar = atoi (argv[3]);
-        	IncrementarLDC(libro, id_a_buscar, cantidad_a_incrementar);
-    }else{
+        	IncrementarLDC(libro, id_a_buscar, cantidad_a_incrementar, &total_libros);
+    	}else{
         printf("Función no reconocida: %s\n", argv[1]);
         return 1;
+		}
+	}else if (argc == 7){
+		if(strcmp(argv[1], "Añadir") == 0){
+			const char* titulo = argv[2];   // Título del libro
+        	const char* autor = argv[3];    // Autor del libro
+        	float precio = atof(argv[4]);   // Precio del libro (convertido de cadena a float)
+        	int categoria = atoi(argv[5]);  // Categoría del libro (convertido de cadena a int)
+        	int cantidad = atoi(argv[6]);   // Cantidad del libro en stock (convertido de cadena a int)
+
+        	// Llamamos a la función para añadir el libro desde la línea de comandos
+        	AñadirLibroDesdeLineaDeComandos(&libro, &total_libros, titulo, autor, precio, categoria, cantidad);
+		}else{
+			 printf("Uso incorrecto de la línea de comandos. El formato es:\n");
+			 printf("./programa Añadir \"titulo\" \"autor\" precio, categoria, cantidad\n");
+        return EXIT_FAILURE;
+		}
 	}
-}
 
 	free(libro);
 
