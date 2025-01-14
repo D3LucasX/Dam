@@ -252,6 +252,9 @@ void AñadirLibroDesdeLineaDeComandos(Libro** catalogo, int* total_libros, const
 
     // Usar realloc para redimensionar el catálogo
     Libro* temp = (Libro*) realloc(*catalogo, (*(total_libros) + 1) * sizeof(Libro));
+    /* Con esto realojamos los libros en otra direccion de memoria en la que entre el nuevo libro, si cabe en la dirección de memoria que estan, no cambiara*/
+    /* cuando haces un realloc, no hace falta ejecutar el free del malloc que tenemos, ya que libera la memoria del malloc.*/
+   
     if (temp == NULL) {
         printf("Error al reasignar memoria\n");
         return; // Salir si realloc falla
@@ -276,12 +279,12 @@ void AñadirLibroDesdeLineaDeComandos(Libro** catalogo, int* total_libros, const
 }
 void AñadirLibro(Libro** catalogo, int * total_libros){
 /* En esta función, se añade un libro nuevo*/
-/* Se pasa como parametros un puntero a puntero que appunta a la dirección de memoria del arreglo libros.
+/* Se pasa como parametros un puntero a puntero que apunta a la dirección de memoria del arreglo libros.
 Esto es necesario ya que al usar realloc, puede devolver una nueva direccion de memoria,por lo que debemos
 de actualizar el puntero catalogo para que apunte a la nueva direccion del catalogo*/
 /*¿QUE ME PASABA ANTES?
 		- Al no pasar la direccion de memoria modificada, al imprimir todos los libros, los datos del nuevo
-		  libro se perdian, ya que no sabia el main donde se habia guardado. Todo esto por que se ejecutaba
+		  libro se perdían, ya que no sabia el main donde se habia guardado. Todo esto por que se ejecutaba
 		  en la función pero no en el main(lo que hacemos es pasar la dirección de memoria por referencia.)*/	
 /*También pasamos como parametro un puntero a la variable total_libros, para pasar su valor por referencia*/
 
@@ -326,7 +329,7 @@ redimensionarlo.*/
 	inicializarLibro(&(*catalogo)[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
 /* Aqui lo que hacemos es acceder a la direccion de memoria del puntero que apunta al siguiente libro a agregar*/
 
-	printf("Nuevo libro añadido: %s por %s\n", catalogo[*total_libros - 1]->titulo, catalogo[*total_libros - 1]->autor);
+	printf("Nuevo libro añadido: %s por %s\n", (*catalogo)[*total_libros - 1].titulo, (*catalogo)[*total_libros - 1].autor);
 }
 
 
@@ -341,13 +344,20 @@ int main (int argc, char *argv[]){
 
 	if (argc < 2) {
         printf("Uso: %s <Mostrar>\n", argv[0]);
-        printf("Uso: %s <IdentificarLibro>\n", argv[0]);
-        printf("Uso: %s <Categoria>\n", argv[0]);
-        printf("Uso: %s <Autor>\n", argv[0]);
-        printf("Uso: %s <Stock>\n", argv[0]);
-        //return EXIT_FAILURE;
+        printf("Uso: %s <IdentificarLibro -> id>\n", argv[0]);
+        printf("Uso: %s <Categoria: \n\
+        		0. Ficción\n\
+			1. No Ficción.\n\
+			2. Poesía.\n\
+			3. Teatro.\n\
+			4. Ensayo.\n\
+			5. Salir>\n", argv[0]);
+        printf("Uso: %s <Autor -> 'Nombre Del Autor'>\n", argv[0]);
+        printf("Uso: %s <Stock -> id -> Cantidad A Añadir>\n", argv[0]);
+        return EXIT_FAILURE;
     }
-    Libro * libro = (Libro*) malloc(40 * sizeof(Libro));
+    Libro * libro = (Libro*) malloc(*total_libros * sizeof(Libro));
+    /* Reservamos memoria para */
 
     if(libro == NULL){
     	printf("ERROR, NO HAY MEMORIA\n");
@@ -501,7 +511,8 @@ int main (int argc, char *argv[]){
 		}
 	}
 
-	free(libro);
+	free(libro); // Si no añadimos ningún libro, y no hacemos ningun realloc, esto 
+				 // libera el malloc anterior.
 
 	return EXIT_SUCCESS;
 
