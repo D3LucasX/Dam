@@ -343,6 +343,7 @@ int main (int argc, char *argv[]){
 	
 
 	if (argc < 2) {
+		printf("EJECUCIÓN DE FUNCIONES DESDE LA LÍNEA DE COMANDOS\n");
         printf("Uso: %s <Mostrar>\n", argv[0]);
         printf("Uso: %s <IdentificarLibro -> id>\n", argv[0]);
         printf("Uso: %s <Categoria: \n\
@@ -354,14 +355,16 @@ int main (int argc, char *argv[]){
 			5. Salir>\n", argv[0]);
         printf("Uso: %s <Autor -> 'Nombre Del Autor'>\n", argv[0]);
         printf("Uso: %s <Stock -> id -> Cantidad A Añadir>\n", argv[0]);
-        return EXIT_FAILURE;
+        printf("Uso: %s <Añadir -> id -> 'Título' -> 'Autor' -> Precio -> Categoria -> Cantidad.>\n", argv[0]);
+
+        return EXIT_FAILURE;//Si se quier eejecutar el programa con el menu, se debera eliminar o comentar este EXIT_FAILURE;
     }
-    Libro * libro = (Libro*) malloc(*total_libros * sizeof(Libro));
-    /* Reservamos memoria para */
+    Libro * libro = (Libro*) malloc( 40 * sizeof(Libro));
+    /*Reserva de memoria para 40 libros*/
 
     if(libro == NULL){
     	printf("ERROR, NO HAY MEMORIA\n");
-    	return EXIT_FAILURE;
+    	return EXIT_FAILURE; //Si no hay espacio para hacer la reserva de la memória, entonces se cancelara.
     }
 
     /*INICIALIZAMOS LIBRO*/
@@ -505,8 +508,7 @@ int main (int argc, char *argv[]){
         	// Llamamos a la función para añadir el libro desde la línea de comandos
         	AñadirLibroDesdeLineaDeComandos(&libro, &total_libros, titulo, autor, precio, categoria, cantidad);
 		}else{
-			 printf("Uso incorrecto de la línea de comandos. El formato es:\n");
-			 printf("./programa Añadir \"titulo\" \"autor\" precio, categoria, cantidad\n");
+			 printf("Función no reconocida: %s\n", argv[1]);
         return EXIT_FAILURE;
 		}
 	}
