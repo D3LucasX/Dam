@@ -277,60 +277,10 @@ void AñadirLibroDesdeLineaDeComandos(Libro** catalogo, int* total_libros, const
     // Imprimir un mensaje de confirmación
     printf("Nuevo libro añadido: %s por %s\n", (*catalogo)[*total_libros - 1].titulo, (*catalogo)[*total_libros - 1].autor);
 }
-void AñadirLibro(Libro** catalogo, int * total_libros){
-/* En esta función, se añade un libro nuevo*/
-/* Se pasa como parametros un puntero a puntero que apunta a la dirección de memoria del arreglo libros.
-Esto es necesario ya que al usar realloc, puede devolver una nueva direccion de memoria,por lo que debemos
-de actualizar el puntero catalogo para que apunte a la nueva direccion del catalogo*/
-/*¿QUE ME PASABA ANTES?
-		- Al no pasar la direccion de memoria modificada, al imprimir todos los libros, los datos del nuevo
-		  libro se perdían, ya que no sabia el main donde se habia guardado. Todo esto por que se ejecutaba
-		  en la función pero no en el main(lo que hacemos es pasar la dirección de memoria por referencia.)*/	
-/*También pasamos como parametro un puntero a la variable total_libros, para pasar su valor por referencia*/
-
-	Libro Libro_Nuevo;
-
-	Libro* temp = (Libro*) realloc (*catalogo ,(*(total_libros) + 1) * sizeof(Libro));
-/* *catalogo se usa para acceder al puntero original que apunta al arreglo de libros y pasarlo a realloc para 
-redimensionarlo.*/
-	if (temp == NULL) {
-        printf("Error al reasignar memoria\n");
-        return; // Salir si realloc falla
-    }
-
-    *catalogo = temp;
-    // Si realloc fue exitoso, actualizamos la direccion de memoria, siendo temp la que guarda la nueva direccion de memoria
-    // entonces la guardamos en catalogo para asi actualizarlo.
-
-	Libro_Nuevo.id = (*total_libros) + 1;
 
 
-	printf("¿Cuál es el titulo del nuevo libro?\n");
-	scanf(" %[^\n]", Libro_Nuevo.titulo);
-	getchar();
+void AñadirLibro(Libro** catalogo, int * total_libros);
 
-	printf(" Escribe el nombre del autor.\n");
-	scanf(" %[^\n]", Libro_Nuevo.autor);
-	getchar();
-
-	printf("Introduzca el precio:\n");
-	scanf("%f", &Libro_Nuevo.precio);
-	getchar();
-
-	printf("Introduzca la categoria:\n");
-	scanf("%u", &Libro_Nuevo.categoria);
-	getchar();
-
-	printf("¿Cual es el stock total del libro?\n");
-	scanf("%d", &Libro_Nuevo.cantidad);
-	getchar();
-	// Pedimos los datos del nuevo libro.
-
-	inicializarLibro(&(*catalogo)[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
-/* Aqui lo que hacemos es acceder a la direccion de memoria del puntero que apunta al siguiente libro a agregar*/
-
-	printf("Nuevo libro añadido: %s por %s\n", (*catalogo)[*total_libros - 1].titulo, (*catalogo)[*total_libros - 1].autor);
-}
 
 
  
@@ -464,7 +414,7 @@ int main (int argc, char *argv[]){
 			int id_a_buscar = atoi (argv[2]);
 			/*Nueva funcion*/
 			IdentificaLibroPorId(libro, id_a_buscar, &total_libros);
-			return 1;
+			//return 1;
 		}else if(strcmp(argv[1], "Categoria") == 0){
 			int categoria = atoi (argv[2]);
 			FiltraPorCategoria(libro, categoria, &total_libros);
@@ -522,3 +472,58 @@ int main (int argc, char *argv[]){
 
 
 
+
+void AñadirLibro(Libro** catalogo, int * total_libros){
+/* En esta función, se añade un libro nuevo*/
+/* Se pasa como parametros un puntero a puntero que apunta a la dirección de memoria del arreglo libros.
+Esto es necesario ya que al usar realloc, puede devolver una nueva direccion de memoria,por lo que debemos
+de actualizar el puntero catalogo para que apunte a la nueva direccion del catalogo*/
+/*¿QUE ME PASABA ANTES?
+		- Al no pasar la direccion de memoria modificada, al imprimir todos los libros, los datos del nuevo
+		  libro se perdían, ya que no sabia el main donde se habia guardado. Todo esto por que se ejecutaba
+		  en la función pero no en el main(lo que hacemos es pasar la dirección de memoria por referencia.)*/	
+/*También pasamos como parametro un puntero a la variable total_libros, para pasar su valor por referencia*/
+
+	Libro Libro_Nuevo;
+
+	Libro* temp = (Libro*) realloc (*catalogo ,(*(total_libros) + 1) * sizeof(Libro));
+/* *catalogo se usa para acceder al puntero original que apunta al arreglo de libros y pasarlo a realloc para 
+redimensionarlo.*/
+	if (temp == NULL) {
+        printf("Error al reasignar memoria\n");
+        return; // Salir si realloc falla
+    }
+
+    *catalogo = temp;
+    // Si realloc fue exitoso, actualizamos la direccion de memoria, siendo temp la que guarda la nueva direccion de memoria
+    // entonces la guardamos en catalogo para asi actualizarlo.
+
+	Libro_Nuevo.id = (*total_libros) + 1;
+
+
+	printf("¿Cuál es el titulo del nuevo libro?\n");
+	scanf(" %[^\n]", Libro_Nuevo.titulo);
+	getchar();
+
+	printf(" Escribe el nombre del autor.\n");
+	scanf(" %[^\n]", Libro_Nuevo.autor);
+	getchar();
+
+	printf("Introduzca el precio:\n");
+	scanf("%f", &Libro_Nuevo.precio);
+	getchar();
+
+	printf("Introduzca la categoria:\n");
+	scanf("%u", &Libro_Nuevo.categoria);
+	getchar();
+
+	printf("¿Cual es el stock total del libro?\n");
+	scanf("%d", &Libro_Nuevo.cantidad);
+	getchar();
+	// Pedimos los datos del nuevo libro.
+
+	inicializarLibro(&(*catalogo)[*total_libros], Libro_Nuevo.id, Libro_Nuevo.titulo, Libro_Nuevo.autor, Libro_Nuevo.precio, Libro_Nuevo.categoria, Libro_Nuevo.cantidad, total_libros);
+/* Aqui lo que hacemos es acceder a la direccion de memoria del puntero que apunta al siguiente libro a agregar*/
+
+	printf("Nuevo libro añadido: %s por %s\n", (*catalogo)[*total_libros - 1].titulo, (*catalogo)[*total_libros - 1].autor);
+}
