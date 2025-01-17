@@ -53,7 +53,7 @@ void BuscarPorAutor(const Libro * FiltroPorAutor, int *total_libros);
 
 void inicializarLibro(Libro* direccion, int id, char* titulo, char* autor, float precio, int categoria, int cantidad, int* total_libros);
 
-void AñadirLibroDesdeLineaDeComandos(Libro** catalogo, int* total_libros, const char* titulo, const char* autor, float precio, int categoria, int cantidad) ;
+void AñadirLibroDesdeLineaDeComandos(Libro** catalogo, int* total_libros, const char* titulo, const char* autor, float precio, int categoria, int cantidad);
 
 void AñadirLibro(Libro** catalogo, int * total_libros);
 
@@ -122,10 +122,8 @@ int main (int argc, char *argv[]){
 	/* argc son la cantidad de elementos que quieres pedir */
 		
         //return EXIT_FAILURE;//Si se quier eejecutar el programa con el menu, se debera eliminar o comentar este EXIT_FAILURE;
-    
-	/*if (argc < 2){
-		printf("Si quieres ejecutar las funciones desde la línea de comandos, sigue las instrucciones:\n");
-		printf(" ");
+	if (argc < 2){
+		printf(" \n");
 		printf("EJECUCIÓN DE FUNCIONES DESDE LA LÍNEA DE COMANDOS\n");
 		printf("Pulsa ctrl + c, y despues al ejecutar el programa, escribe al lado del ejecutable la funcion que quiera realizar siguiendo los pasos que encontrará a continuación.\n");
         printf("Uso: %s <Mostrar>\n", argv[0]);
@@ -140,24 +138,26 @@ int main (int argc, char *argv[]){
         printf("Uso: %s <Autor -> 'Nombre Del Autor'>\n", argv[0]);
         printf("Uso: %s <Stock -> id -> Cantidad A Añadir>\n", argv[0]);
         printf("Uso: %s <Añadir ->'Título' -> 'Autor' -> Precio -> Categoria -> Cantidad.>\n", argv[0]);
-
-		*/printf("***********************************************************\n");
+		printf("Si quieres ejecutar las funciones desde la línea de comandos, sigue las instrucciones:\n");
+		printf(" \n");
+		printf(" \n");
+		printf("***********************************************************\n");
 		printf("*Bienvenido a la Biblioteca Nacional de los Iulian Drakars* \n");
 		printf("***********************************************************\n");
 		while(opcion != 6){
-		printf("Introduzca la opción de la acción que desee realizar:\n\
-				1. Mostrar todo el catálogo de libros.\n\
-				2. Buscar un libro por ID.\n\
-				3. Incrementar el stock de un libro.\n\
-				4. Filtrar por categoría.\n\
-				5. Filtrar por Autor.\n\
-				6. Añadir Libro.\n\
-				7. Salir\n");
+		printf("\tIntroduzca la opción de la acción que desee realizar:\n\
+				\t1. Mostrar todo el catálogo de libros.\n\
+				\t2. Buscar un libro por ID.\n\
+				\t3. Incrementar el stock de un libro.\n\
+				\t4. Filtrar por categoría.\n\
+				\t5. Filtrar por Autor.\n\
+				\t6. Añadir Libro.\n\
+				\t7. Salir\n");
 				scanf("%d", &opcion);
 				if (opcion > 6){
-				return 1;
-			}
-				switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
+					return 1;
+				}
+			switch(opcion){ // Hacemos una condicional de casos para crear un menu que nos permitirá elegir que función queremos ejecutar.
 				case 1:
 					MostrarLibros(libro, &total_libros); // Llamamos a la función con el argumento libro ya que es el puntero que pasamos en la funcion como parámetro.
 					break;
@@ -178,41 +178,36 @@ int main (int argc, char *argv[]){
 				default:
 					("\n");
 				break;
+			}
 		}
-	}/*
 	}else if (argc == 2) {
-		if (strcmLip(argv[1], "Mostrar") == 0) {
-        MostrarLibros(libro, &total_libros);
+		if (strcmp(argv[1], "Mostrar") == 0) {
+        	MostrarLibros(libro, &total_libros);
+    	}else if (strcmp(argv[1], "IdentificarLibro") == 0){
+    		printf("Introduzca el ID del libro que quier buscar.\n");
+    	}else if (strcmp(argv[1], "Categoria") == 0){
+    		printf("Introduzca la categoría.\n");
+    	}else if (strcmp(argv[1], "Autor") == 0){
+    		printf("Introduzca el nombre del autor entre comillas.\n");
+    	}else if (strcmp(argv[1], "Stock") == 0){
+    		printf("Introduzca el ID del Líbro al que le quieras aumentar el stock, y el stock que quieras añadir.\n");
+    	}else if (strcmp(argv[1], "Añadir") == 0){
+    		printf("Introduce el 'Título', 'Nombre del autor', precio, categoría y la cantidad que hay disponible en stock.\n");
     	}
-	}
 
-	if (strcmp(argv[1], "IdentificarLibro") == 0) {
-		if (argc < 3){
-			printf("Introduzca el ID del libro que quier buscar.\n");
-		}else{
+    } else if (argc == 3) {
+		if (strcmp(argv[1], "IdentificarLibro") == 0){
 			int id_a_buscar = atoi(argv[2]);
-        	if (id_a_buscar < 1 || id_a_buscar > total_libros) {
+			if (id_a_buscar < 1 || id_a_buscar > total_libros) {
             printf("Error al encontrar el ID proporcionado.\n");
             printf("Introduzca un id válido entre 1 y %d.\n", total_libros);
         	}else {
             IdentificaLibroPorId(libro, id_a_buscar, &total_libros);
             return 1;  // Si ya se encuentra el libro, termina la ejecución
         	}
-    	}
-    }
-
-	if (strcmp(argv[1], "Categoria") == 0) {
-    // Verificar si argv[2] está vacío
-    if (argc < 3 || strlen(argv[2]) == 0) {
-        printf("Error: Se requiere una categoría. Seleccione una opción:\n\
-            0. Ficción.\n\
-            1. No Ficción.\n\
-            2. Poesía.\n\
-            3. Teatro.\n\
-            4. Ensayo.\n");
-    } else {
+    	}else if (strcmp(argv[1], "Categoria") == 0) {
+   			 // Verificar si argv[2] está vacío
         int categoria = atoi(argv[2]);
-
         if (categoria < 0 || categoria > 4) {
             printf("Categoría no válida, seleccione su categoría en función de la siguiente leyenda:\n\
                 0. Ficción.\n\
@@ -223,39 +218,28 @@ int main (int argc, char *argv[]){
         } else {
             FiltraPorCategoria(libro, categoria, &total_libros);
         }
-    }
-}
-
-		if(strcmp(argv[1], "Autor") == 0){
+    	}else if(strcmp(argv[1], "Autor") == 0){
 			char  * autor_a_buscar = argv[2];
-
 			//Otra manera de hacerlo.
 			/*char  autor_a_buscar[100];
-			scrpcy(autor_a_buscar,argv[2]);*
-			if (argc < 3 || strlen(argv[2]) == 0) {
-        		printf("Error: Escriba el nombre de un autor entre comillas.\n");
-
-			}else{
+			scrpcy(autor_a_buscar,argv[2]);*/
 
 			/*Lo que hacemos es que creamos un puntero al primer caracter de 
 			argv[2] para que apunte al primer caracter de argv[2] */
 			/* Porque cuando ponemos autor_a_buscar[100] esta reservado en memoria estatica, 
 			y argv[2], reserva en memoria dinámica, no esta en el mismo sitio, y eso a C
-			no le gusta, por eso no podemos hacer char autor_a_buscar = argv[2]; *
+			no le gusta, por eso no podemos hacer char autor_a_buscar = argv[2]; */
 			// Controlar algún error.
 			FiltrarPorAutor(libro, autor_a_buscar, &total_libros);
 			//Otra manera de hacerlo, pero no es la mas recomendable, ya que puede llevar a errores.
-			/*FiltrarPorAutor(libro, argv[2]);*
+			/*FiltrarPorAutor(libro, argv[2]);*/
+		}else if(strcmp(argv[1], "Stock") == 0){
+			printf("Introduzca la cantidad que quiere añadir al stock.\n");
+		}else if (strcmp(argv[1], "Añadir") == 0){
+			printf("Introduce el 'Nombre del autor', precio, categoría y la cantidad que hay disponible en stock.\n");
 		}
-	}
-
+	}else if(argc == 4){
 			if(strcmp(argv[1], "Stock") == 0) {
-				if(argc < 3){
-					printf("Introduzca el ID del libro que quiere incrementar y el incremento por favor.\n");
-				}else if (argc < 4){
-					printf("Introduzca la cantidad que quiere añadir al stock.\n");
-				}else{
-
 				int id_a_buscar = atoi (argv[2]);
 				int cantidad_a_incrementar = atoi (argv[3]);
 				if (id_a_buscar < 0 || id_a_buscar > total_libros){
@@ -266,45 +250,49 @@ int main (int argc, char *argv[]){
         		else{
         		IncrementarLDC(libro, id_a_buscar, cantidad_a_incrementar, &total_libros);
         		}
-        	}
-			}
+       		}else if(strcmp(argv[1], "Añadir") == 0){
+       			printf("Introduce el precio, categoría y la cantidad que hay disponible en stock.\n");
+       		} 		
+        	
+			
 
-			if(strcmp(argv[1], "Añadir") == 0){
-				if (argc < 3){
-					printf("Introduce el 'Título', 'Nombre del autor', precio, categoría y la cantidad que hay disponible en stock.\n");
-				}else if(argc < 4){
-					printf("Introduce el 'Nombre del autor', precio, categoría y la cantidad que hay disponible en stock.\n");
-				}else if(argc < 5){
-					printf("Introduce el precio, categoría y la cantidad que hay disponible en stock.\n");
-				}else if(argc < 6){
-					printf("Introduce la categoría y la cantidad que hay disponible en stock.\n");
-				}else if(argc < 7){
-					printf("Introduce la cantidad que hay disponible en stock.\n");
-				}else{
+	}else if(argc == 5){
+		if(strcmp(argv[1], "Añadir") == 0){
+			printf("Introduce la categoría y la cantidad que hay disponible en stock.\n");
+		}
+	}else if(argc == 6){
+		if(strcmp(argv[1], "Añadir") == 0){
+			printf("Introduce la cantidad que hay disponible en stock.\n");
+		}
+
+	}else if (argc == 7){
 				const char* titulo = argv[2];   // Título del libro
         		const char* autor = argv[3];    // Autor del libro
-        		float precio = atof(argv[4]);   // Precio del libro (convertido de cadena a float)
+        		float precio = atoi(argv[4]);   // Precio del libro (convertido de cadena a float)
         		int categoria = atoi(argv[5]);  // Categoría del libro (convertido de cadena a int)
         		int cantidad = atoi(argv[6]);   // Cantidad del libro en stock (convertido de cadena a int)
+		if(strcmp(argv[1], "Añadir") == 0){
         		if (precio < 0){
         			printf("¿Te gusta trabajar grátis?\n");
         			printf("Anda... anda! ponle un precio a eso...!\n");
-
-        		}else if (categoria < 0 || categoria > 4) {
+        		
+				}else if (categoria < 0 || categoria > 4) {
             		printf("Categoría no válida, seleccione su categoría en función de la siguiente leyenda:\n\
                 			0. Ficción.\n\
                			 	1. No Ficción.\n\
                				2. Poesía.\n\
                 			3. Teatro.\n\
                 			4. Ensayo.\n");
-            	}else if(cantidad < 0 || cantidad > total_libros){
+            	}else if(cantidad < 0){
 					printf("Para añadir libros, el valor  ha de ser positivo.\n");
         		}else{
         		// Llamamos a la función para añadir el libro desde la línea de comandos
         		AñadirLibroDesdeLineaDeComandos(&libro, &total_libros, titulo, autor, precio, categoria, cantidad);
+        		}
         	}
-		}
-	}*/
+}
+
+
 
 	free(libro); // Si no añadimos ningún libro, y no hacemos ningun realloc, esto 
 				 // libera el malloc anterior.
