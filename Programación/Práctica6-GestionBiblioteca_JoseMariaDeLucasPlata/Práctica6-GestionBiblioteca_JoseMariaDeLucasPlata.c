@@ -406,8 +406,11 @@ int main (int argc, char *argv[]){
 		}
 	}
 	}else if (argc == 2) {
+		// ./practica6 Mostrar
+		// ./practica6 identificarLibro X
+		// ./practica6 identificarLibro ID
 		if (strcmp(argv[1], "Mostrar") == 0) {
-        MostrarLibros(libro, &total_libros);
+       	 MostrarLibros(libro, &total_libros);
     }
 	}else if(argc == 3){ 
     	if(strcmp(argv[1], "IdentificarLibro") == 0) {
