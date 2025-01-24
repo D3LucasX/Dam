@@ -63,8 +63,3 @@ void OrdenarNumeros(int* numerosAordenar, int total_numeros){
 			printf("%dº - %d", i, temporal);
 		}	
 	}
-
-	/* To do:
-		-Hacer el realloc.
-		-ordenar el dowhile
-		-Probar
