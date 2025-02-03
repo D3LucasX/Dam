@@ -17,4 +17,4 @@ echo "Introduce tu token de acceso personal (no tu contraseña): "
 read -s token
 
 # Empujar cambios al repositorio
-git push https://$usuario:$token@github.com/tu_usuario/tu_repositorio.git
+git push https://$usuario:$token@github.com/D3LucasX/Dam
