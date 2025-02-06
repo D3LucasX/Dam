@@ -8,7 +8,8 @@
  *
  */
 // Función que invierte el sentido de una palabra al reves.
-char* invertir(char* palabra){
+char* invertir(char* palabra){ // De tipo char* para que devuelva el puntero de la cadena
+							   // si no solo devolveria un char.
 	int tamaño = strlen(palabra);
 	int newTam = tamaño - 1;
 	char* newArr = (char*) malloc (tamaño * sizeof(char));

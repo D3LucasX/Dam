@@ -16,7 +16,7 @@ int pedirNumero(){
 	}
 	return num;
 }
-Funcion que dice si un número es primo o no.
+//Funcion que dice si un número es primo o no.
 bool esPrimo(int num){
 	if (num <= 1) return false;
 	for (int i = 2; i * i <= num; i++){
@@ -72,4 +72,57 @@ int main (){
 	   memoria otros procesos o variables. A los punteros que apuntan a memoria que ya ha sido liberada se le llama punteros
 	   colgantes y acceder a ellos puede provocar segmentation faults o resultados impredecibles.
 	   
-		
+		/*#include <stdio.h>
+#include <stdlib.h>
+
+void sumarMatriz(int filas, int columnas) {
+    // 1. Crear la matriz dinámica de tamaño filas x columnas
+    int** matriz = (int**)malloc(filas * sizeof(int*)); // Reservar memoria para las filas
+    if (matriz == NULL) {
+        printf("Error al asignar memoria para las filas.\n");
+        return;  // Retornar sin hacer nada si la memoria no se asigna
+    }
+
+    // Reservar memoria para cada fila (cada una será un array de enteros)
+    for (int i = 0; i < filas; i++) {
+        matriz[i] = (int*)malloc(columnas * sizeof(int));  // Reservar memoria para cada columna
+        if (matriz[i] == NULL) {
+            printf("Error al asignar memoria para las columnas.\n");
+            return;  // Retornar sin hacer nada si la memoria no se asigna
+        }
+    }
+
+    // 2. Llenar la matriz con valores (por ejemplo, valores de 1 a 9)
+    int valor = 1;
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matriz[i][j] = valor++;
+        }
+    }
+
+    // 3. Sumar todos los elementos de la matriz
+    int suma = 0;
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            suma += matriz[i][j];
+        }
+    }
+
+    // 4. Imprimir la suma
+    printf("La suma de todos los elementos de la matriz es: %d\n", suma);
+
+    // 5. Liberar la memoria de la matriz
+    for (int i = 0; i < filas; i++) {
+        free(matriz[i]);  // Liberar cada fila
+    }
+    free(matriz);  // Liberar la memoria de las filas
+}
+
+int main() {
+    int filas = 3;
+    int columnas = 3;
+    
+    sumarMatriz(filas, columnas);  // Llamada a la función que no devuelve nada
+    
+    return 0;
+}*/
