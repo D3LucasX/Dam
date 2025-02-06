@@ -11,16 +11,16 @@
    int encontrado = busqueda_binaria(array, 10, a_buscar); == int busqueda_binaria(int* array, int tam int a_buscar){}
    necesitaremos una funcion int Busqueda_recursiva, que se llamara en la otra función*/
 int busqueda_binaria(int* array, int a_buscar, int ini, int fin){
-int mitad = (ini + fin)/2;
+	int mitad = (ini + fin)/2;
 
-if(ini > fin ){
-        printf("Número no encontrado.\n");
-	return -1;
-}else if (a_buscar == array[mitad]){
-        printf("Numero encontrado en la posición %d.\n", mitad);
-	return mitad;
+	if(ini > fin ){
+        	printf("Número no encontrado.\n");
+		return -1;
+	}else if (a_buscar == array[mitad]){
+	        printf("Numero encontrado en la posición %d.\n", mitad);
+		return mitad;
 
-}	
+	}	
 if (array[mitad] > a_buscar){
         return busqueda_binaria(array, a_buscar,ini, mitad - 1); // Mitad -1 para que cuando calculemos otra vez la mitad
 								 // no vuelva a comparar una posicion que ya hemos comparado
