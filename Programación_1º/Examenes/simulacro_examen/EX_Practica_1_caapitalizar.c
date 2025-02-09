@@ -6,10 +6,10 @@
  * 	Autor: Jose Maria De Lucas Plata.
  *
  */
-char capitalizar (char * letra_minuscula){
-	*letra_minuscula = *letra_minuscula + 'Z' - 'z';
-	printf("%s", letra_minuscula);
-	return *letra_minuscula;
+char capitalizar (char  letra_minuscula){
+	letra_minuscula = letra_minuscula + 'Z' - 'z';
+	printf("%c", letra_minuscula);
+	return letra_minuscula;
 }
 
 int main (){
@@ -27,7 +27,10 @@ int main (){
  printf("Escriba la palabra con la longitud exacta que facilitaste anteriormente.\n");
  scanf("%s", palabra);
 //for (int i = 0; i < longitud_palabra; i++){
-	capitalizar(palabra);
+ for(int i = 0; i < longitud_palabra; i++){
+	capitalizar(palabra[i]);
+}
+
 //}
 printf("%s", palabra);
 free(palabra);
@@ -42,4 +45,4 @@ free(palabra);
    Para asegurarnos, lo mejor es ejecutar con valgrind, para
    ver si hemos usado memoria que no habiamos reservado.
    Si reservaramos espacio para 5 caracteres, y escribieramos murcielago,
-   estariamos utilizando memoria que no hemos reservado.
+   estariamos utilizando memoria que no hemos reservado.*/
