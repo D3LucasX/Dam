@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Básico 1</title>
+    <script>
+        /*La ventanita que nos salta con información, le das a aceptar y luego se carga el body*/
+        alert("Hola"); /* --> ventana*/
+
+
+        /*iniciamos una variaable que guardara lo que te pregunta eol prompt*/
+        let mensaje= prompt("¿Que edad tienes?", 10); /*El diez sale por dejecto ya escrito en la venanita, si no ponemos nada, la caja estaría vacía*/
+        /*Esto lo ponemos para que nos aparezca en una ventanita la respuesta que le introdujimos en el prompt*/
+        alert(mensaje);
+        
+
+        /*La respuesta devuelve true o false segun hayas respondido tu*/
+        let pregunta= confirm("¿Eres mayor de edad?");
+        alert(pregunta);
+
+
+        /*Se ve en la herramienta de desarrollador en consola no te sale en ningún otro sitio*/
+        console.log("la edad de la persona es : " + mensaje);
+
+
+        /*Cada vez que quieras escribir o que salga algo en el body ponemos la etiqueta document.*/
+        document.write("<h2> hola </h2>");
+
+
+        /*Se puede sumar variables que no son del mismo tipo y te saca el resultado en este caso en la consola.*/
+        /*En este caso, al no ser del mismo tipo, te lo concatena y te lo pone uno detras de otro*/
+        /*Si fuera del mismo tipo, por ejemplo, a= 2 y b = 3 = resultado = 5, y lo sumaría*/
+        let a= "Hola";
+        let b= 2;
+        let resultado = a+b;
+        console.log(resultado);
+
+        /*Esto no lo concatenaría, le estaríamos diciendo con parseInt que tome el valor de 'a' como un Int y que 
+          luego opere con b*/
+        let a=prompt("Dame un número");
+        let b= 2;
+        let resultado =parseInt(a)+b;
+        console.log(resultado);
+
+
+        /*Condicional en JS*/
+        if(a==b){
+            console.log("Son iguales");
+        }else{
+            console.log("Son distintos");
+        }
+
+
+        /*Bucle while (EJEMPLO)*/
+        while(a > 0){
+            console.log(a);
+            a--;
+        }
+
+
+
+    /*Bucle for (EJEMPLO)*/
+    for (let i = 0; x<3; x++){
+        console.log("Hola");
+    }
+    </script>
+</head>
+<body>
+    <h1>Java Script</h1>
+</body>
+</html>
