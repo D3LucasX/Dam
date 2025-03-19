@@ -29,12 +29,10 @@
     }
  }
 int main (){
-    char cadena[] = "((())(()))";
     int balance = 0;
+    char cadena[50];
+    scanf("%s", cadena);
     int profundidad = prof(cadena, balance);
-    printf("%d", profundidad);
-    char2[] = "((()))(())"
-    profundidad = prof(cadena, balance);
     printf("%d", profundidad);
     // Lo que pasa aqui, es que la variable estatica sigue guardando el valor que tenia cuando se llamo la funcion 
     // anteriormente, por lo que hay que tener cuidado con usar variables estáticas.
