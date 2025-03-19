@@ -1,3 +1,0 @@
-INFO: Entrada en subdir2.
-DEBUG: Algo no está bien.
-ERROR: Fallo crítico en subdir2.

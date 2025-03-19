@@ -1,3 +1,0 @@
-INFO El sistema arranca correctamente
-ERROR Falla de lectura en disco
-INFO Usuario ha iniciado sesión

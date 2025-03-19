@@ -1,3 +1,0 @@
-Procesando el fichero: Prueba2.txt
-Procesando el fichero: processes.txt
-Procesando el fichero: todo.txt

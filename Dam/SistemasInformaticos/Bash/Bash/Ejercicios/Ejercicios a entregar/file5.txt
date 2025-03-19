@@ -1,4 +1,0 @@
-Una línea 1
-Otra línea 2
-Ejemplo línea 3
-Otra línea 4

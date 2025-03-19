@@ -1,2 +1,0 @@
-INFO: Primera entrada de subdir1.
-ERROR: Algo falló en subdir1.
