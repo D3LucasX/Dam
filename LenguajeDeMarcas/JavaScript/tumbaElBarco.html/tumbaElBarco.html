@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="tumbaElBarco.js"></script>
+    <link rel="stylesheet" href="tumbaElBarco.css">
+    <title>tumbaElBarco</title>
+</head>
+<body>
+    <h1>1. Ejercicio 1: Adivina el número.</h1>
+    <h2>El número para adivinar es: <span id="numeroAdivinar"></span> y el número de veces es: <span id="veces"></span></h2> <!--Span pone el número en la misma línea, un div lo pondría debajo-->
+    <h1>Tabla Jugador 1</h1>
+    <table>
+        <!--Tabla Jugador 1-->
+        <tr>
+            <!-- Fila 1 -->
+            <td id="0AT1"><button class="boton" value="0AT1">X</button></td>
+            <td id="0BT1"><button class="boton" value="0BT1">X</button></td>
+            <td id="0CT1"><button class="boton" value="0CT1">X</button></td>
+            <td id="0DT1"><button class="boton" value="0DT1">X</button></td>
+            <td id="0ET1"><button class="boton" value="0ET1">X</button></td>
+            <td id="0FT1"><button class="boton" value="0FT1">X</button></td>
+            <td id="0GT1"><button class="boton" value="0GT1">X</button></td>
+            <td id="0HT1"><button class="boton" value="0HT1">X</button></td>
+            <td id="0IT1"><button class="boton" value="0IT1">X</button></td>
+            <td id="0JT1"><button class="boton" value="0JT1">X</button></td>
+            <td id="0KT1"><button class="boton" value="0KT1">X</button></td>
+        </tr>
+        <!-- Fila 2 -->
+        <tr>
+            <td id="1AT1"><button class="boton" value="1AT1">X</button></td>
+            <td id="1BT1"><button class="boton" value="1BT1">X</button></td>
+            <td id="1CT1"><button class="boton" value="1CT1">X</button></td>
+            <td id="1DT1"><button class="boton" value="1DT1">X</button></td>
+            <td id="1ET1"><button class="boton" value="1ET1">X</button></td>
+            <td id="1FT1"><button class="boton" value="1FT1">X</button></td>
+            <td id="1GT1"><button class="boton" value="1GT1">X</button></td>
+            <td id="1HT1"><button class="boton" value="1HT1">X</button></td>
+            <td id="1IT1"><button class="boton" value="1IT1">X</button></td>
+            <td id="1JT1"><button class="boton" value="1JT1">X</button></td>
+            <td id="1KT1"><button class="boton" value="1KT1">X</button></td>
+        </tr>
+        <!-- Fila 3 -->
+        <tr>
+            <td id="2AT1"><button class="boton" value="2AT1">X</button></td>
+            <td id="2BT1"><button class="boton" value="2BT1">X</button></td>
+            <td id="2CT1"><button class="boton" value="2CT1">X</button></td>
+            <td id="2DT1"><button class="boton" value="2DT1">X</button></td>
+            <td id="2ET1"><button class="boton" value="2ET1">X</button></td>
+            <td id="2FT1"><button class="boton" value="2FT1">X</button></td>
+            <td id="2GT1"><button class="boton" value="2GT1">X</button></td>
+            <td id="2HT1"><button class="boton" value="2HT1">X</button></td>
+            <td id="2IT1"><button class="boton" value="2IT1">X</button></td>
+            <td id="2JT1"><button class="boton" value="2JT1">X</button></td>
+            <td id="2KT1"><button class="boton" value="2KT1">X</button></td>
+        </tr>
+        <!-- Fila 4 -->
+        <tr>
+            <td id="3AT1"><button class="boton" value="3AT1">X</button></td>
+            <td id="3BT1"><button class="boton" value="3BT1">X</button></td>
+            <td id="3CT1"><button class="boton" value="3CT1">X</button></td>
+            <td id="3DT1"><button class="boton" value="3DT1">X</button></td>
+            <td id="3ET1"><button class="boton" value="3ET1">X</button></td>
+            <td id="3FT1"><button class="boton" value="3FT1">X</button></td>
+            <td id="3GT1"><button class="boton" value="3GT1">X</button></td>
+            <td id="3HT1"><button class="boton" value="3HT1">X</button></td>
+            <td id="3IT1"><button class="boton" value="3IT1">X</button></td>
+            <td id="3JT1"><button class="boton" value="3JT1">X</button></td>
+            <td id="3KT1"><button class="boton" value="3KT1">X</button></td>
+        </tr>
+        <!-- Fila 5 -->
+        <tr>
+            <td id="4AT1"><button class="boton" value="4AT1">X</button></td>
+            <td id="4BT1"><button class="boton" value="4BT1">X</button></td>
+            <td id="4CT1"><button class="boton" value="4CT1">X</button></td>
+            <td id="4DT1"><button class="boton" value="4DT1">X</button></td>
+            <td id="4ET1"><button class="boton" value="4ET1">X</button></td>
+            <td id="4FT1"><button class="boton" value="4FT1">X</button></td>
+            <td id="4GT1"><button class="boton" value="4GT1">X</button></td>
+            <td id="4HT1"><button class="boton" value="4HT1">X</button></td>
+            <td id="4IT1"><button class="boton" value="4IT1">X</button></td>
+            <td id="4JT1"><button class="boton" value="4JT1">X</button></td>
+            <td id="4KT1"><button class="boton" value="4KT1">X</button></td>
+        </tr>
+        <!-- Fila 6 -->
+        <tr>
+            <td id="5AT1"><button class="boton" value="5AT1">X</button></td>
+            <td id="5BT1"><button class="boton" value="5BT1">X</button></td>
+            <td id="5CT1"><button class="boton" value="5CT1">X</button></td>
+            <td id="5DT1"><button class="boton" value="5DT1">X</button></td>
+            <td id="5ET1"><button class="boton" value="5ET1">X</button></td>
+            <td id="5FT1"><button class="boton" value="5FT1">X</button></td>
+            <td id="5GT1"><button class="boton" value="5GT1">X</button></td>
+            <td id="5HT1"><button class="boton" value="5HT1">X</button></td>
+            <td id="5IT1"><button class="boton" value="5IT1">X</button></td>
+            <td id="5JT1"><button class="boton" value="5JT1">X</button></td>
+            <td id="5KT1"><button class="boton" value="5KT1">X</button></td>
+        </tr>
+        <!-- Fila 7 -->
+        <tr>
+            <td id="6AT1"><button class="boton" value="6AT1">X</button></td>
+            <td id="6BT1"><button class="boton" value="6BT1">X</button></td>
+            <td id="6CT1"><button class="boton" value="6CT1">X</button></td>
+            <td id="6DT1"><button class="boton" value="6DT1">X</button></td>
+            <td id="6ET1"><button class="boton" value="6ET1">X</button></td>
+            <td id="6FT1"><button class="boton" value="6FT1">X</button></td>
+            <td id="6GT1"><button class="boton" value="6GT1">X</button></td>
+            <td id="6HT1"><button class="boton" value="6HT1">X</button></td>
+            <td id="6IT1"><button class="boton" value="6IT1">X</button></td>
+            <td id="6JT1"><button class="boton" value="6JT1">X</button></td>
+            <td id="6KT1"><button class="boton" value="6KT1">X</button></td>
+        </tr>
+        <!-- Fila 8 -->
+        <tr>
+            <td id="7AT1"><button class="boton" value="7AT1">X</button></td>
+            <td id="7BT1"><button class="boton" value="7BT1">X</button></td>
+            <td id="7CT1"><button class="boton" value="7CT1">X</button></td>
+            <td id="7DT1"><button class="boton" value="7DT1">X</button></td>
+            <td id="7ET1"><button class="boton" value="7ET1">X</button></td>
+            <td id="7FT1"><button class="boton" value="7FT1">X</button></td>
+            <td id="7GT1"><button class="boton" value="7GT1">X</button></td>
+            <td id="7HT1"><button class="boton" value="7HT1">X</button></td>
+            <td id="7IT1"><button class="boton" value="7IT1">X</button></td>
+            <td id="7JT1"><button class="boton" value="7JT1">X</button></td>
+            <td id="7KT1"><button class="boton" value="7KT1">X</button></td>
+        </tr>
+        <!-- Fila 9 -->
+        <tr>
+            <td id="8AT1"><button class="boton" value="8AT1">X</button></td>
+            <td id="8BT1"><button class="boton" value="8BT1">X</button></td>
+            <td id="8CT1"><button class="boton" value="8CT1">X</button></td>
+            <td id="8DT1"><button class="boton" value="8DT1">X</button></td>
+            <td id="8ET1"><button class="boton" value="8ET1">X</button></td>
+            <td id="8FT1"><button class="boton" value="8FT1">X</button></td>
+            <td id="8GT1"><button class="boton" value="8GT1">X</button></td>
+            <td id="8HT1"><button class="boton" value="8HT1">X</button></td>
+            <td id="8IT1"><button class="boton" value="8IT1">X</button></td>
+            <td id="8JT1"><button class="boton" value="8JT1">X</button></td>
+            <td id="8KT1"><button class="boton" value="8KT1">X</button></td>
+        </tr>
+        <!-- Fila 10 -->
+        <tr>
+            <td id="9AT1"><button class="boton" value="9AT1">X</button></td>
+            <td id="9BT1"><button class="boton" value="9BT1">X</button></td>
+            <td id="9CT1"><button class="boton" value="9CT1">X</button></td>
+            <td id="9DT1"><button class="boton" value="9DT1">X</button></td>
+            <td id="9ET1"><button class="boton" value="9ET1">X</button></td>
+            <td id="9FT1"><button class="boton" value="9FT1">X</button></td>
+            <td id="9GT1"><button class="boton" value="9GT1">X</button></td>
+            <td id="9HT1"><button class="boton" value="9HT1">X</button></td>
+            <td id="9IT1"><button class="boton" value="9IT1">X</button></td>
+            <td id="9JT1"><button class="boton" value="9JT1">X</button></td>
+            <td id="9KT1"><button class="boton" value="9KT1">X</button></td>
+        </tr>
+        <!-- Fila 11 -->
+        <tr>
+            <td id="10AT1"><button class="boton" value="10AT1">X</button></td>
+            <td id="10BT1"><button class="boton" value="10BT1">X</button></td>
+            <td id="10CT1"><button class="boton" value="10CT1">X</button></td>
+            <td id="10DT1"><button class="boton" value="10DT1">X</button></td>
+            <td id="10ET1"><button class="boton" value="10ET1">X</button></td>
+            <td id="10FT1"><button class="boton" value="10FT1">X</button></td>
+            <td id="10GT1"><button class="boton" value="10GT1">X</button></td>
+            <td id="10HT1"><button class="boton" value="10HT1">X</button></td>
+            <td id="10IT1"><button class="boton" value="10IT1">X</button></td>
+            <td id="10JT1"><button class="boton" value="10JT1">X</button></td>
+            <td id="10KT1"><button class="boton" value="10KT1">X</button></td>
+        </tr>
+    </table>
+    <!--Tabla Jugador 2-->
+    <h1>Tabla Jugador 2</h1>
+    <table>
+    <tr>
+        <!-- Fila 1 -->
+        <td id="0AT2"><button class="boton" value="0AT2">X</button></td>
+        <td id="0BT2"><button class="boton" value="0BT2">X</button></td>
+        <td id="0CT2"><button class="boton" value="0CT2">X</button></td>
+        <td id="0DT2"><button class="boton" value="0DT2">X</button></td>
+        <td id="0ET2"><button class="boton" value="0ET2">X</button></td>
+        <td id="0FT2"><button class="boton" value="0FT2">X</button></td>
+        <td id="0GT2"><button class="boton" value="0GT2">X</button></td>
+        <td id="0HT2"><button class="boton" value="0HT2">X</button></td>
+        <td id="0IT2"><button class="boton" value="0IT2">X</button></td>
+        <td id="0JT2"><button class="boton" value="0JT2">X</button></td>
+        <td id="0KT2"><button class="boton" value="0KT2">X</button></td>
+    </tr>
+    <!-- Fila 2 -->
+    <tr>
+        <td id="1AT2"><button class="boton" value="1AT2">X</button></td>
+        <td id="1BT2"><button class="boton" value="1BT2">X</button></td>
+        <td id="1CT2"><button class="boton" value="1CT2">X</button></td>
+        <td id="1DT2"><button class="boton" value="1DT2">X</button></td>
+        <td id="1ET2"><button class="boton" value="1ET2">X</button></td>
+        <td id="1FT2"><button class="boton" value="1FT2">X</button></td>
+        <td id="1GT2"><button class="boton" value="1GT2">X</button></td>
+        <td id="1HT2"><button class="boton" value="1HT2">X</button></td>
+        <td id="1IT2"><button class="boton" value="1IT2">X</button></td>
+        <td id="1JT2"><button class="boton" value="1JT2">X</button></td>
+        <td id="1KT2"><button class="boton" value="1KT2">X</button></td>
+    </tr>
+    <!-- Fila 3 -->
+    <tr>
+        <td id="2AT2"><button class="boton" value="2AT2">X</button></td>
+        <td id="2BT2"><button class="boton" value="2BT2">X</button></td>
+        <td id="2CT2"><button class="boton" value="2CT2">X</button></td>
+        <td id="2DT2"><button class="boton" value="2DT2">X</button></td>
+        <td id="2ET2"><button class="boton" value="2ET2">X</button></td>
+        <td id="2FT2"><button class="boton" value="2FT2">X</button></td>
+        <td id="2GT2"><button class="boton" value="2GT2">X</button></td>
+        <td id="2HT2"><button class="boton" value="2HT2">X</button></td>
+        <td id="2IT2"><button class="boton" value="2IT2">X</button></td>
+        <td id="2JT2"><button class="boton" value="2JT2">X</button></td>
+        <td id="2KT2"><button class="boton" value="2KT2">X</button></td>
+    </tr>
+    <!-- Fila 4 -->
+    <tr>
+        <td id="3AT2"><button class="boton" value="3AT2">X</button></td>
+        <td id="3BT2"><button class="boton" value="3BT2">X</button></td>
+        <td id="3CT2"><button class="boton" value="3CT2">X</button></td>
+        <td id="3DT2"><button class="boton" value="3DT2">X</button></td>
+        <td id="3ET2"><button class="boton" value="3ET2">X</button></td>
+        <td id="3FT2"><button class="boton" value="3FT2">X</button></td>
+        <td id="3GT2"><button class="boton" value="3GT2">X</button></td>
+        <td id="3HT2"><button class="boton" value="3HT2">X</button></td>
+        <td id="3IT2"><button class="boton" value="3IT2">X</button></td>
+        <td id="3JT2"><button class="boton" value="3JT2">X</button></td>
+        <td id="3KT2"><button class="boton" value="3KT2">X</button></td>
+    </tr>
+    <!-- Fila 5 -->
+    <tr>
+        <td id="4AT2"><button class="boton" value="4AT2">X</button></td>
+        <td id="4BT2"><button class="boton" value="4BT2">X</button></td>
+        <td id="4CT2"><button class="boton" value="4CT2">X</button></td>
+        <td id="4DT2"><button class="boton" value="4DT2">X</button></td>
+        <td id="4ET2"><button class="boton" value="4ET2">X</button></td>
+        <td id="4FT2"><button class="boton" value="4FT2">X</button></td>
+        <td id="4GT2"><button class="boton" value="4GT2">X</button></td>
+        <td id="4HT2"><button class="boton" value="4HT2">X</button></td>
+        <td id="4IT2"><button class="boton" value="4IT2">X</button></td>
+        <td id="4JT2"><button class="boton" value="4JT2">X</button></td>
+        <td id="4KT2"><button class="boton" value="4KT2">X</button></td>
+    </tr>
+    <!-- Fila 6 -->
+    <tr>
+        <td id="5AT2"><button class="boton" value="5AT2">X</button></td>
+        <td id="5BT2"><button class="boton" value="5BT2">X</button></td>
+        <td id="5CT2"><button class="boton" value="5CT2">X</button></td>
+        <td id="5DT2"><button class="boton" value="5DT2">X</button></td>
+        <td id="5ET2"><button class="boton" value="5ET2">X</button></td>
+        <td id="5FT2"><button class="boton" value="5FT2">X</button></td>
+        <td id="5GT2"><button class="boton" value="5GT2">X</button></td>
+        <td id="5HT2"><button class="boton" value="5HT2">X</button></td>
+        <td id="5IT2"><button class="boton" value="5IT2">X</button></td>
+        <td id="5JT2"><button class="boton" value="5JT2">X</button></td>
+        <td id="5KT2"><button class="boton" value="5KT2">X</button></td>
+    </tr>
+    <!-- Fila 7 -->
+    <tr>
+        <td id="6AT2"><button class="boton" value="6AT2">X</button></td>
+        <td id="6BT2"><button class="boton" value="6BT2">X</button></td>
+        <td id="6CT2"><button class="boton" value="6CT2">X</button></td>
+        <td id="6DT2"><button class="boton" value="6DT2">X</button></td>
+        <td id="6ET2"><button class="boton" value="6ET2">X</button></td>
+        <td id="6FT2"><button class="boton" value="6FT2">X</button></td>
+        <td id="6GT2"><button class="boton" value="6GT2">X</button></td>
+        <td id="6HT2"><button class="boton" value="6HT2">X</button></td>
+        <td id="6IT2"><button class="boton" value="6IT2">X</button></td>
+        <td id="6JT2"><button class="boton" value="6JT2">X</button></td>
+        <td id="6KT2"><button class="boton" value="6KT2">X</button></td>
+    </tr>
+    <!-- Fila 8 -->
+    <tr>
+        <td id="7AT2"><button class="boton" value="7AT2">X</button></td>
+        <td id="7BT2"><button class="boton" value="7BT2">X</button></td>
+        <td id="7CT2"><button class="boton" value="7CT2">X</button></td>
+        <td id="7DT2"><button class="boton" value="7DT2">X</button></td>
+        <td id="7ET2"><button class="boton" value="7ET2">X</button></td>
+        <td id="7FT2"><button class="boton" value="7FT2">X</button></td>
+        <td id="7GT2"><button class="boton" value="7GT2">X</button></td>
+        <td id="7HT2"><button class="boton" value="7HT2">X</button></td>
+        <td id="7IT2"><button class="boton" value="7IT2">X</button></td>
+        <td id="7JT2"><button class="boton" value="7JT2">X</button></td>
+        <td id="7KT2"><button class="boton" value="7KT2">X</button></td>
+    </tr>
+    <!-- Fila 9 -->
+    <tr>
+        <td id="8AT2"><button class="boton" value="8AT2">X</button></td>
+        <td id="8BT2"><button class="boton" value="8BT2">X</button></td>
+        <td id="8CT2"><button class="boton" value="8CT2">X</button></td>
+        <td id="8DT2"><button class="boton" value="8DT2">X</button></td>
+        <td id="8ET2"><button class="boton" value="8ET2">X</button></td>
+        <td id="8FT2"><button class="boton" value="8FT2">X</button></td>
+        <td id="8GT2"><button class="boton" value="8GT2">X</button></td>
+        <td id="8HT2"><button class="boton" value="8HT2">X</button></td>
+        <td id="8IT2"><button class="boton" value="8IT2">X</button></td>
+        <td id="8JT2"><button class="boton" value="8JT2">X</button></td>
+        <td id="8KT2"><button class="boton" value="8KT2">X</button></td>
+    </tr>
+    <!-- Fila 10 -->
+    <tr>
+        <td id="9AT2"><button class="boton" value="9AT2">X</button></td>
+        <td id="9BT2"><button class="boton" value="9BT2">X</button></td>
+        <td id="9CT2"><button class="boton" value="9CT2">X</button></td>
+        <td id="9DT2"><button class="boton" value="9DT2">X</button></td>
+        <td id="9ET2"><button class="boton" value="9ET2">X</button></td>
+        <td id="9FT2"><button class="boton" value="9FT2">X</button></td>
+        <td id="9GT2"><button class="boton" value="9GT2">X</button></td>
+        <td id="9HT2"><button class="boton" value="9HT2">X</button></td>
+        <td id="9IT2"><button class="boton" value="9IT2">X</button></td>
+        <td id="9JT2"><button class="boton" value="9JT2">X</button></td>
+        <td id="9KT2"><button class="boton" value="9KT2">X</button></td>
+    </tr>
+    <!-- Fila 11 -->
+    <tr>
+        <td id="10AT2"><button class="boton" value="10AT2">X</button></td>
+        <td id="10BT2"><button class="boton" value="10BT2">X</button></td>
+        <td id="10CT2"><button class="boton" value="10CT2">X</button></td>
+        <td id="10DT2"><button class="boton" value="10DT2">X</button></td>
+        <td id="10ET2"><button class="boton" value="10ET2">X</button></td>
+        <td id="10FT2"><button class="boton" value="10FT2">X</button></td>
+        <td id="10GT2"><button class="boton" value="10GT2">X</button></td>
+        <td id="10HT2"><button class="boton" value="10HT2">X</button></td>
+        <td id="10IT2"><button class="boton" value="10IT2">X</button></td>
+        <td id="10JT2"><button class="boton" value="10JT2">X</button></td>
+        <td id="10KT2"><button class="boton" value="10KT2">X</button></td>
+    </tr>
+</table>
+</body>
+</html>
