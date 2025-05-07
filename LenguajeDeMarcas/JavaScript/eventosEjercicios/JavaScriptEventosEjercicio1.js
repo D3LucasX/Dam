@@ -1,4 +1,4 @@
-function comprobarLetra
+
 function seleccionarPalabra(){
     let palabras = ["Perro", "Gato", "Elefante", "Rinoceronte", "Hipopotamo", "Tigre", "León", "Cebra", "Jirafa", "Canguro"];
     let palabraAleatoria[Math.floor(Math.random() * palabras.length)]; //Math.floor redondea hacia abajo el resultado de la multiplicacion de Math.random() por la longitud del array.
@@ -49,5 +49,6 @@ function load(){
             resultado.textContent = `La letra "${letra}" aparece ${contador} vez/veces.`;
         }
 
+}
 }
 window.addEventListener("DOMContentLoaded", load, false);
