@@ -5,8 +5,8 @@ function comprobarCasilla(event, tableroJ2){
     let boton = event.currentTarget; // Asegura que siempre se refiere al botón que tiene el evento
     let value = boton.value; // Obtiene el value del botón
 
-    let i = parseInt(value.match(/^\d+/)[0]); // Extrae los números iniciales (fila)
-    let j = value[1]; // Obtiene la letra que representa la columna
+    let fila = parseInt(value.match(/^\d+/)[0]); // Extrae los números iniciales (fila)
+    let columna = value[1]; // Obtiene la letra que representa la columna
     console.log("Fila (i):", i);
     console.log("Columna (j):", j);
     if (tableroJ2[i][j] === 1){
