@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    
+}
+#casilla, #letra {
+    display: inline-block; /* Ajusta el tamaño al contenido */
+    background: linear-gradient(to right, blue, purple); /* Degradado de azul a morado */
+    color: white; /* Color del texto */
+    padding: 5px 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de la fuente */
+    text-align: center; /* Centra el texto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto visual */
+    margin: 10px 0; /* Espaciado vertical */
+}
+   
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+.table, tr, td{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    height: 50px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+    margin: 10px auto;
+
+}
+
+h1 {
+    color: linear-gradient(to right, blue, purple); /* Degradado de azul a morado */
+    margin-bottom: 20px;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+button:hover {
+    background-color: #ff5722; /* Cambia a un color diferente al pasar el cursor */
+    color: #fff; /* Cambia el color del texto si es necesario */
+}
+
+#resultado {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+}
