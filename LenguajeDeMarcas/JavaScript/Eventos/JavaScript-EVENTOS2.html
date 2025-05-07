@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="JavaScript-EVENTOS2.css"> <!--Por si necesitamos una hoja de estilo-->
+    <script src="JavaScript-EVENTOS2.js"></script>
+    <title>Eventos 2</title>
+</head>
+<body>
+    <h1>1. Ejercicio 1: Adivina el número.</h1>
+    <h2>El número para adivinar es: <span id="numeroAdivinar"></span> y el número de veces es: <span id="veces"></span></h2> <!--Span pone el número en la misma línea, un div lo pondría debajo-->
+    <table>
+        <!--Fila 1-->
+        <tr>
+            <!--Ponemos un id para que cuando descubramos la casilla nos salga lo que contiene, y podamos llamarla individualmente-->
+            <td id="00"><button class="boton" value="00">X</button></td>
+            <td id="01"><button class="boton" value="01">X</button></td>
+            <td id="02"><button class="boton" value="02">X</button></td>
+            <!--Cuando le damos a la X se envia el valor de la casilla-->
+        </tr>
+        <!--Fila 2-->
+        <tr>
+            <td id="10"><button class="boton" value="10">X</button></td>
+            <td id="11"><button class="boton" value="11">X</button></td>
+            <td id="12"><button class="boton" value="12">X</button></td>
+        </tr>
+        <!--Fila 3-->
+        <tr>
+            <td id="20"><button class="boton" value="20">X</button></td>
+            <td id="21"><button class="boton" value="21">X</button></td>
+            <td id="22"><button class="boton" value="22">X</button></td>
+        </tr>
+    </table>
+    <h3>Intento nº: <span id="intentos">3</span></h3> <!--Div para mostrar los intentos-->
+    
+</body>
+</html>
