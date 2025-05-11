@@ -1,0 +1,53 @@
+.botones {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espaciado entre los botones */
+    margin-top: 10px; /* Espaciado superior */
+}
+
+#resultado {
+    font-size: 18px;
+    color: #555;
+    text-align: center; /* Centra el texto dentro del div */
+    background-color: #f9f9f9; /* Fondo claro para el resultado */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 0; /* Elimina bordes redondeados si no los necesitas */
+    box-shadow: none; /* Elimina la sombra si no es necesaria */
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    margin: 0; /* Elimina márgenes */
+    border: 1px solid #ccc; /* Borde del resultado */
+    font-weight: bold; /* Texto en negrita */
+    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+    background: linear-gradient(to right, #22d2e9, #051f68); /* Fondo degradado */
+    color: white; /* Color del texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+.botones button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+#titulo {
+    text-align: center; /* Centra el texto */
+    position: relative; /* Necesario para posicionar la línea */
+    font-size: 24px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    color: #333; /* Color del texto */
+}
+
+#titulo::after {
+    content: ""; /* Línea adicional */
+    position: absolute;
+    bottom: -5px; /* Espaciado entre el texto y la línea */
+    left: 0;
+    width: 100%; /* Línea ocupa todo el ancho */
+    height: 2px; /* Grosor de la línea */
+    background-color: #333; /* Color de la línea */
+}
