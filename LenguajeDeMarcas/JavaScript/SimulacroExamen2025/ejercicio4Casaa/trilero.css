@@ -1,0 +1,61 @@
+/* Estilo general del body */
+body {
+    background: linear-gradient(to right, #d3d3d3, #ffffff); /* Degradado gris a blanco */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Estilo para la tabla */
+#trileroTable {
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+/* Estilo para las celdas de la tabla */
+#trileroTable td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Estilo para los botones */
+button {
+    width: 150px;
+    height: 150px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right, #4c8bf5, #9b56d3); /* Degradado azul a morado */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del botón al pasar el mouse */
+}
+
+/* Estilo cuando el botón es correcto */
+button:disabled {
+    cursor: not-allowed; /* Deshabilita el cursor cuando el botón está deshabilitado */
+}
+
+/* Estilo cuando el botón es verde (acertado) */
+button[style*="background-color: green"] {
+    background-color: green;
+}
+
+/* Estilo cuando el botón es rojo (fallado) */
+button[style*="background-color: red"] {
+    background-color: red;
+}
+
+/* Estilo para el texto de los contadores */
+#aciertos, #fallos {
+    font-size: 24px;
+    margin: 10px;
+    font-weight: bold;
+}
