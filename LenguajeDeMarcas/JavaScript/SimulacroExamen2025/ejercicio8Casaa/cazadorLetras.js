@@ -23,7 +23,7 @@ function llenarTabla(){
     for (let i = 0; i < 5; i++){
         for (let j = 0; j < 5 ; j++){
             matriz[i][j] = generarLetra();
-            let boton = document.querySelector(`button[value="${i}${j}"]`);
+            let boton = document.querySelector(`#tablaBotones button[value="${i}${j}"]`);
             boton.textContent = "X"; // Muestra "X" en lugar de la letra
         }
     }
